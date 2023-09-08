@@ -1,0 +1,34 @@
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
+
+# Ignore the virtual environment directory (if using virtualenv or venv)
+venv/
+env/
+
+# Ignore database files
+db.sqlite3
+
+# Ignore secret key settings (store secrets in environment variables)
+*.secret_key
+
+# Ignore log files
+*.log
+
+# Ignore development-specific settings (local settings, debug settings, etc.)
+*.settings.local
+
+# Ignore media and static files (upload files, compiled assets, etc.)
+media/
+static/
+
+# Ignore sensitive data (API keys, credentials, etc.) stored in config files
+*.env
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore editor and IDE specific files
+*.swp
+.vscode/
+.idea/
