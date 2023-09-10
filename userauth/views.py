@@ -3,6 +3,7 @@ from userauth.forms import UserRegisterForm
 
 from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
+from  userauth.models import User
 
 
 def RegisterUserView(request):
@@ -31,8 +32,34 @@ def RegisterUserView(request):
     }
     return render(request, "userauth/register.html", context)
 
+def LoginUserView(request):
+    if request.method == "POST":
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        try:
+            # means the email from the model is the same as the entered email/ meanning it exists
+            user = User.objects.get(email=email)
+            user = authenticate(request,email=email,password=password)
+
+            #  check if there is a user
+            if user is not None:
+                login(request,user)
+                messages.success(request,"You are logged in ...")
+                return redirect("core:index")
+
+            else:
+                messages.warning(request, "username or password is incorrect")
+                return redirect("userauth:login-user")
+
+        except:
+            messages.warning(request, "User does not exist in the System.")
+            return redirect("userauth:login-user")
+
+    else:
+        return render(request, "userauth/login.html")
 
 def logoutUserView(request):
-    logout(request.user)
-    messages.success("You have been logged out.")
-    return redirect("userauth.login")
+    logout(request)
+    messages.success(request,"You have been logged out.")
+    return redirect("userauth:login-user")
