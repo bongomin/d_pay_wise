@@ -25,6 +25,7 @@ MARITAL_STATUS = (
 IDENTITY_TYPE = (
     ("national id","National ID"),
     ("passport","PassPort"),
+    ("driving lincenses","Driving Lincenses"),
 )
 
 
