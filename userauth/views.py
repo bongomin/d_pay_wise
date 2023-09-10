@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from userauth.forms import UserRegisterForm
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
 
 
@@ -30,3 +30,9 @@ def RegisterUserView(request):
         "SignUpForm": form
     }
     return render(request, "userauth/register.html", context)
+
+
+def logoutUserView(request):
+    logout(request.user)
+    messages.success("You have been logged out.")
+    return redirect("userauth.login")
