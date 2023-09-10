@@ -2,6 +2,8 @@ from django.db import models
 import uuid
 from shortuuid.django_fields import ShortUUIDField
 from userauth.models import User
+# add django signals
+from django.db.models.signals import post_save
 
 ACCOUNT_STATUS = (
     ("active", "Active"),
@@ -50,3 +52,16 @@ class Account(models.Model):
                 return str(self.user)
             except:
                 return "Account Model"
+
+# IMPLEMENT AUTO ACCOUNT CREATION BY USE OF SIGNALS ON SIGNUP
+# django signals to create an account when an account is created
+def create_account(sender,instance, created, **kwargs):
+    if created:
+        Account.objects.create(user=instance)
+
+def save_account(instance, **kwargs):
+    # save the account that has been created
+    instance.account.save()
+
+post_save.connect(create_account,sender=User)
+post_save.connect(save_account,sender=User)
