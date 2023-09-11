@@ -24,12 +24,16 @@ def kyc_registration(request):
             messages.success(
                 request, "KYC form submitted successfully, In review now.")
             return redirect("core:index")
+        else:
+            print(form.errors)
+            print(form.non_field_errors)
     else:
         form = KYCForm(instance=kyc)
 
     context = {
         "account": account,
-        "form": form
+        "form": form,
+        "kyc": kyc
     }
 
     return render(request, "account/kyc-form.html", context)
