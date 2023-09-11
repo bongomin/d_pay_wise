@@ -67,6 +67,7 @@ class KYC(models.Model):
     gender = models.CharField(choices=GENDER, max_length=50)
     next_of_keen = models.CharField(max_length=100)
     identity_type = models.CharField(max_length=120,choices=IDENTITY_TYPE)
+    identity_image = models.ImageField(upload_to="kyc", null=True,blank=True)
     date_of_birth = models.DateField(auto_now=False)
     signature = models.ImageField(upload_to="kyc")
 
