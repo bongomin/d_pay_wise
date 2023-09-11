@@ -2,7 +2,6 @@ from django import forms
 from account.models import KYC
 from django.forms import ImageField, FileInput, DateInput
 
-
 class DateInput(forms.DateInput):
     # this enable automatic selection of date
     input_type = 'date'
@@ -30,10 +29,9 @@ class KYCForm (forms.ModelForm):
             'mobile',
             'email',
             'fax',
-            'date',
         ]
 
-        widget = {
+        widgets = {
             "full_name": forms.TextInput(attrs={
                 "placeholder": "Full Name"
             }),
