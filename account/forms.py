@@ -10,6 +10,7 @@ class DateInput(forms.DateInput):
 class KYCForm (forms.ModelForm):
     identity_image = ImageField(widget=FileInput)
     image = ImageField(widget=FileInput)
+    signature = ImageField(widget=FileInput)
 
     class Meta:
         model = KYC
