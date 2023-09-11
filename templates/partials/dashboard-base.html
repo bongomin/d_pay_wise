@@ -1,4 +1,5 @@
-{% load static %}
+{% load static %} <!-- Make sure this line is at the top of your template -->
+
 <!doctype html>
 <html lang="en">
 
@@ -6,120 +7,215 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>D-Pay - Banking Beyond Boundaries</title>
+    <title>D-Pay wiser Banking Beyond Boundaries</title>
     <link rel="shortcut icon" href="{% static 'assets/images/fav.png' %}" type="image/x-icon">
-    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/jquery-ui.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/plugin/nice-select.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/plugin/magnific-popup.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/plugin/slick.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/arafat-font.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/plugin/animate.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets1/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets1/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets1/css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'assets1/css/plugin/apexcharts.css' %}">
+    <link rel="stylesheet" href="{% static 'assets1/css/plugin/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'assets1/css/arafat-font.css' %}">
+    <link rel="stylesheet" href="{% static 'assets1/css/plugin/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'assets1/css/style.css' %}">
 </head>
 
 <body>
+    <!-- start preloader -->
+    {% comment %} <div class="preloader" id="preloader"></div> {% endcomment %}
+    <!-- end preloader -->
 
+    <!-- Scroll To Top Start-->
     <a href="javascript:void(0)" class="scrollToTop"><i class="fas fa-angle-double-up"></i></a>
+    <!-- Scroll To Top End -->
 
-   <!-- header-section start -->
-    <header class="header-section">
+    <!-- header-section start -->
+    <header class="header-section body-collapse">
         <div class="overlay">
-            <div class="container">
+            <div class="container-fruid">
                 <div class="row d-flex header-area">
-                    <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.html">
-                            <img src="assets/images/logo.png" class="logo" alt="logo">
-                        </a>
-                        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbar-content">
-                            <i class="fas fa-bars"></i>
-                        </button>
-                        <div class="collapse navbar-collapse justify-content-end" id="navbar-content">
-                            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-                                <li class="nav-item dropdown main-navbar">
-                                    <a class="nav-link dropdown-toggle" href="javascript:void(0)"
-                                        data-bs-toggle="dropdown" data-bs-auto-close="outside">Personal</a>
-                                    <ul class="dropdown-menu main-menu shadow">
-                                        <li><a class="nav-link" href="payments-01.html">Freelancer Payments</a></li>
-                                        <li><a class="nav-link" href="subscriptions.html">Subscriptions</a></li>
-                                        <li><a class="nav-link" href="security.html">Security</a></li>
-                                        <li><a class="nav-link" href="fees.html">Fees</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown main-navbar">
-                                    <a class="nav-link dropdown-toggle" href="javascript:void(0)"
-                                        data-bs-toggle="dropdown" data-bs-auto-close="outside">Business</a>
-                                    <ul class="dropdown-menu main-menu shadow">
-                                        <li><a class="nav-link" href="payments-01.html">Business Payments</a></li>
-                                        <li><a class="nav-link" href="business-account.html">Business Account</a></li>
-                                        <li><a class="nav-link" href="corporate-card.html">Corporate Card</a></li>
-                                        <li><a class="nav-link" href="expense-management.html">Expense Management</a></li>
-                                        <li><a class="nav-link" href="budgeting-and-analytics.html">Budgeting</a></li>
-                                        <li><a class="nav-link" href="integrations.html">Integrations</a></li>
-                                        <li><a class="nav-link" href="invoice-management.html">Invoice</a></li>
-                                        <li><a class="nav-link" href="security.html">Security</a></li>
-                                        <li><a class="nav-link" href="rewards.html">Rewards</a></li>
-                                        <li><a class="nav-link" href="fees.html">Fees</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown main-navbar">
-                                    <a class="nav-link dropdown-toggle" href="javascript:void(0)"
-                                        data-bs-toggle="dropdown" data-bs-auto-close="outside">Company</a>
-                                    <ul class="dropdown-menu main-menu shadow">
-                                        <li><a class="nav-link" href="about-us.html">About Us</a></li>
-                                        <li><a class="nav-link" href="career.html">Career</a></li>
-                                        <li><a class="nav-link" href="career-details.html">Career Details</a></li>
-                                        <li class="dropend sub-navbar">
-                                            <a href="javascript:void(0)" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown"
-                                              data-bs-auto-close="outside">Blog</a>
-                                            <ul class="dropdown-menu sub-menu shadow">
-                                                <li><a class="nav-link" href="blog.html">Blog</a></li>
-                                                <li><a class="nav-link" href="blog-details.html">Blog Details</a></li>
-                                            </ul>
+                    <div class="navbar-area d-flex align-items-center justify-content-between">
+                        <div class="sidebar-icon">
+                            <img src="{% static 'assets1/images/icon/menu.png' %}" alt="icon">
+                        </div>
+                        <form method="POST" class="flex-fill"> 
+                            <div class="form-group d-flex align-items-center">
+                                <img src="{% static 'assets1/images/icon/search.png' %}" alt="icon">
+                                <input type="text" placeholder="Type to search...">
+                            </div>
+                        </form>
+                        <div class="dashboard-nav">
+                            <div class="single-item language-area">
+                                <div class="language-btn">
+                                    <img src="{% static 'assets1/images/icon/lang.png' %}" alt="icon">
+                                </div>
+                                <ul class="main-area language-content">
+                                    <li>English</li>
+                                    <li>Hindi</li>
+                                    <li class="active">English (US)</li>
+                                    <li>Japanese</li>
+                                    <li>Kannada</li>
+                                    <li>Lithuanian</li>
+                                </ul>
+                            </div>
+                            <div class="single-item notifications-area">
+                                <div class="notifications-btn">
+                                    <img src="{% static 'assets1/images/icon/bell.png' %}" class="bell-icon" alt="icon">
+                                </div>
+                                <div class="main-area notifications-content">
+                                    <div class="head-area d-flex justify-content-between">
+                                        <h5>Notifications</h5>
+                                        <span class="mdr">4</span>
+                                    </div>
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:void(0)" class="d-flex">
+                                                <div class="img-area">
+                                                    <img src="{% static 'assets1/images/user-1.png' %}" class="max-un" alt="image">
+                                                </div>
+                                                <div class="text-area">
+                                                    <p class="mdr">You received a payment of <b>$134.00</b> from <b>Anna
+                                                            Green</b></p>
+                                                    <p class="mdr time-area">09.39AM</p>
+                                                </div>
+                                            </a>
+                                            <i class="fa-solid fa-caret-right"></i>
                                         </li>
-                                        <li><a class="nav-link" href="error.html">Error</a></li>
+                                        <!-- Rest of your notifications here -->
                                     </ul>
-                                </li>
-                                <li class="nav-item dropdown main-navbar">
-                                    <a class="nav-link dropdown-toggle" href="javascript:void(0)"
-                                        data-bs-toggle="dropdown" data-bs-auto-close="outside">Help</a>
-                                    <ul class="dropdown-menu main-menu shadow">
-                                        <li><a class="nav-link" href="help-center.html">Help Center</a></li>
-                                        <li><a class="nav-link" href="help-center-category.html">Help Category</a></li>
+                                </div>
+                            </div>
+                            <div class="single-item user-area">
+                                <div class="profile-area d-flex align-items-center">
+                                    <span class="user-profile">
+                                        <img src="{% static 'assets1/images/avatar.png' %}" alt="User">
+                                    </span>
+                                    <i class="fa-solid fa-sort-down"></i>
+                                </div>
+                                <div class="main-area user-content">
+                                    <div class="head-area d-flex align-items-center">
+                                        <div class="profile-img">
+                                            <img src="{% static 'assets1/images/avatar-2.png' %}" alt="User">
+                                        </div>
+                                        <div class="profile-head">
+                                            <a href="javascript:void(0)">
+                                                <h5>Kevin Martin</h5>
+                                            </a>
+                                            <p class="wallet-id">Wallet ID: 6264849965</p>
+                                        </div>
+                                    </div>
+                                    <ul>
+                                        <li class="border-area">
+                                            <a href="account.html"><i class="fas fa-cog"></i>Settings</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)"><i class="fas fa-sign-out"></i>Logout</a>
+                                        </li>
                                     </ul>
-                                </li>
-                            </ul>
-                            <div class="right-area header-action d-flex align-items-center max-un">
-                                <a href="login.html" class="login">Login</a>
-                                <a href="sign-up.html" class="cmn-btn">Sign Up
-                                    <i class="icon-d-right-arrow-2"></i>
-                                </a>
+                                </div>
                             </div>
                         </div>
-                    </nav>
+                    </div>
+                   <div class="sidebar-wrapper">
+    <div class="close-btn">
+        <i class="fa-solid fa-xmark"></i>
+    </div>
+    <div class="sidebar-logo">
+        <a href="dashboard.html"><img src="{% static 'assets/images/logo-1.png' %}" alt="logo"></a>
+    </div>
+    <ul>
+        <li class="active">
+            <a href="dashboard.html">
+                <img src="{% static 'assets1/images/icon/dashboard.png' %}" alt="Dashboard"> <span>Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="transactions.html">
+                <img src="{% static 'assets1/images/icon/transactions.png' %}" alt="Transactions"> <span>Transactions</span>
+            </a>
+        </li>
+        <li>
+            <a href="pay.html">
+                <img src="{% static 'assets1/images/icon/pay.png' %}" alt="Pay"> <span>Pay</span>
+            </a>
+        </li>
+        <li>
+            <a href="receive-step-1.html">
+                <img src="{% static 'assets1/images/icon/receive.png' %}" alt="Receive"> <span>Receive</span>
+            </a>
+        </li>
+        <li>
+            <a href="money-exchange.html">
+                <img src="{% static 'assets1/images/icon/exchange.png' %}" alt="Exchange"> <span>Exchange</span>
+            </a>
+        </li>
+        <li>
+            <a href="recipients.html">
+                <img src="{% static 'assets1/images/icon/recipients.png' %}" alt="Recipients"> <span>Recipients</span>
+            </a>
+        </li>
+        <li>
+            <a href="crypto.html">
+                <img src="{% static 'assets1/images/icon/crypto.png' %}" alt="Crypto"> <span>Crypto</span>
+            </a>
+        </li>
+        <li>
+            <a href="deposit-money.html">
+                <img src="{% static 'assets1/images/icon/deposit.png' %}" alt="Deposit"> <span>Deposit Money</span>
+            </a>
+        </li>
+        <li>
+            <a href="withdraw-money-step-1.html">
+                <img src="{% static 'assets1/images/icon/withdraw.png' %}" alt="Withdraw"> <span>Withdraw Money</span>
+            </a>
+        </li>
+        <!-- Add more sidebar items here -->
+    </ul>
+    <ul class="bottom-item">
+        <li>
+            <a href="account.html">
+                <img src="{% static 'assets1/images/icon/account.png' %}" alt="Account"> <span>Account</span>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">
+                <img src="{% static 'assets1/images/icon/support.png' %}" alt="Support"> <span>Support</span>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">
+                <img src="{% static 'assets1/images/icon/quit.png' %}" alt="Quit"> <span>Quit</span>
+            </a>
+        </li>
+    </ul>
+    <div class="pt-120">
+        <div class="invite-now">
+            <div class="img-area">
+                <img src="{% static 'assets1/images/invite-now-illus.png' %}" alt="Image">
+            </div>
+            <p>Invite your friend and get $25</p>
+            <a href="javascript:void(0)" class="cmn-btn">Invite Now</a>
+        </div>
+    </div>
+</div>
+
                 </div>
             </div>
         </div>
     </header>
     <!-- header-section end -->
-{% block content %}
+    {% block content %}
+    {% endblock content %}
 
-{% endblock content %}
-    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
-    <script src="{% static 'assets/js/jquery-ui.js' %}"></script>
-    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'assets/js/fontawesome.js' %}"></script>
-    <script src="{% static 'assets/js/plugin/slick.js' %}"></script>
-    <script src="{% static 'assets/js/plugin/jquery.nice-select.min.js' %}"></script>
-    <script src="{% static 'assets/js/plugin/counter.js' %}"></script>
-    <script src="{% static 'assets/js/plugin/waypoint.min.js' %}"></script>
-    <script src="{% static 'assets/js/plugin/jquery.magnific-popup.min.js' %}"></script>
-    <script src="{% static 'assets/js/plugin/wow.min.js' %}"></script>
-    <script src="{% static 'assets/js/plugin/plugin.js' %}"></script>
-    <script src="{% static 'assets/js/main.js' %}"></script>
+    <!-- JavaScript files -->
+    <script src="{% static 'assets1/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets1/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets1/js/jquery-ui.js' %}"></script>
+    <script src="{% static 'assets1/js/plugin/apexcharts.js' %}"></script>
+    <script src="{% static 'assets1/js/plugin/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'assets1/js/plugin/waypoint.min.js' %}"></script>
+    <script src="{% static 'assets1/js/plugin/wow.min.js' %}"></script>
+    <script src="{% static 'assets1/js/plugin/plugin.js' %}"></script>
+    <script src="{% static 'assets1/js/main.js' %}"></script>
 </body>
 
 </html>
