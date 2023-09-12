@@ -2,8 +2,27 @@ from django.shortcuts import render, redirect
 from account.models import KYC, Account
 from account.forms import KYCForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+# Import the specific exception
+from django.core.exceptions import ObjectDoesNotExist
 
 
+@login_required
+def account_view(request):
+    try:
+        kyc = KYC.objects.get(user=request.user)
+    except ObjectDoesNotExist:  # Catch the specific
+        messages.warning(request, "You need to submit your KYC!")
+        return redirect("account:kyc-reg")
+    account = Account.objects.get(user=request.user)
+    context = {
+        "account": account,
+        "kyc": kyc
+    }
+    return render(request, "account/account.html", context)
+
+
+@login_required
 def kyc_registration(request):
     user = request.user
     account = Account.objects.get(user=user)
