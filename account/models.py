@@ -7,7 +7,8 @@ from django.db.models.signals import post_save
 
 ACCOUNT_STATUS = (
     ("active", "Active"),
-    ("in-active", "In-active")
+    ("in-active", "In-active"),
+    ("pending", "Pending")
 )
 
 GENDER = (
