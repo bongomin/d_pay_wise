@@ -130,6 +130,10 @@ USE_TZ = True
 
 AUTH_USER_MODEL = 'userauth.User'
 
+LOGIN_URL = "userauth:login-user"  # Where users should be redirected for login
+LOGIN_REDIRECT_URL = "account:account"  # Where users should be redirected after successful login
+LOGOUT_REDIRECT_URL = "userauth:login-user"  # Where users should be redirected after logout
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 MEDIAL_URL = '/media/'
