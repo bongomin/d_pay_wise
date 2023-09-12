@@ -19,11 +19,11 @@ def RegisterUserView(request):
             new_user = authenticate(
                 username=form.cleaned_data['email'], password=form.cleaned_data['password1'])
             login(request,new_user)
-            return redirect("core:index")
+            return redirect("account:account")
     if request.user.is_authenticated:
         messages.warning(
                 request, f"you are already logged in...")
-        return redirect("core:index")
+        return redirect("account:account")
 
     else:
         form = UserRegisterForm()
@@ -46,7 +46,7 @@ def LoginUserView(request):
             if user is not None:
                 login(request,user)
                 messages.success(request,"You are logged in ...")
-                return redirect("core:index")
+                return redirect("account:account")
 
             else:
                 messages.warning(request, "username or password is incorrect")
@@ -56,8 +56,10 @@ def LoginUserView(request):
             messages.warning(request, "User does not exist in the System.")
             return redirect("userauth:login-user")
 
-    else:
-        return render(request, "userauth/login.html")
+    if request.user.is_authenticated:
+        messages.warning(request, "You are already Logged in")
+        return redirect("account:account")
+    return render(request, "userauth/login.html")
 
 def logoutUserView(request):
     logout(request)
