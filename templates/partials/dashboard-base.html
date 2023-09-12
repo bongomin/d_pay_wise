@@ -87,28 +87,32 @@
                             <div class="single-item user-area">
                                 <div class="profile-area d-flex align-items-center">
                                     <span class="user-profile">
-                                        <img src="{% static 'assets1/images/avatar.png' %}" alt="User">
+                                        <img style= "width:40px; height:40px; border-radius: 50%; object-fit:cover;" src="{{ kyc.image.url }}" alt="profile">
                                     </span>
                                     <i class="fa-solid fa-sort-down"></i>
                                 </div>
                                 <div class="main-area user-content">
                                     <div class="head-area d-flex align-items-center">
                                         <div class="profile-img">
-                                            <img src="{% static 'assets1/images/avatar-2.png' %}" alt="User">
+                                            <img style= "width:30px; height:30px; border-radius: 50%; object-fit:cover;" src="{{ kyc.image.url }}" alt="image">
                                         </div>
                                         <div class="profile-head">
-                                            <a href="javascript:void(0)">
-                                                <h5>Kevin Martin</h5>
+                                            <a href="{% url 'account:account' %}">
+                                                <h5>{{kyc.full_name}}</h5>
                                             </a>
-                                            <p class="wallet-id">Wallet ID: 6264849965</p>
+                                            <p class="wallet-id"><small>Account No: {{account.account_number}}<small/></p>
+                                            <p class="wallet-id"><small>Pin No: {{account.account_pin_number}}<small/></p>
                                         </div>
                                     </div>
                                     <ul>
+                                    <li class="border-area">
+                                            <a href="/admin"><i class="fas fa-user"></i>Admin</a>
+                                        </li>
                                         <li class="border-area">
                                             <a href="account.html"><i class="fas fa-cog"></i>Settings</a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0)"><i class="fas fa-sign-out"></i>Logout</a>
+                                            <a href="{% url "userauth:logout-user"%}"><i class="fas fa-sign-out"></i>Logout</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -172,7 +176,7 @@
                     </ul>
                     <ul class="bottom-item">
                         <li>
-                            <a href="account.html">
+                            <a href="{% url 'account:account' %}">
                                 <img src="{% static 'assets1/images/icon/account.png' %}" alt="Account"> <span>Account</span>
                             </a>
                         </li>
@@ -198,13 +202,15 @@
                     </div>
                 </div>
                 </div>
+                  {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{message.tags}}">
+                            <strong> {{message}}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
-        {% comment %} alert start {% endcomment %}
-        <div class="alert alert-success">
-            <strong>Successfull</strong>
-        </div>
-        {% comment %} end alert {% endcomment %}
     </header>
     <!-- header-section end -->
     {% block content %}
