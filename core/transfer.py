@@ -6,7 +6,7 @@ from django.db.models import Q
 
 @login_required
 def search_user_by_account_number(request):
-    accounts = Account.objects.filter(account_status="active")
+    # accounts = Account.objects.filter(account_status="active")
     accounts = Account.objects.all()
 
     query = request.POST.get('account_number')
