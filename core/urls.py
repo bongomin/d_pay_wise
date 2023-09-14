@@ -6,5 +6,7 @@ app_name = "core"
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("search-account/", transfer.search_user_by_account_number, name = "search-account" )
+    path("search-account/", transfer.search_user_by_account_number, name = "search-account" ),
+        path("amount-transfer/<account_number>/", transfer.AmountTransfer, name = "amount-transfer" )
+
 ]
