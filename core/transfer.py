@@ -73,13 +73,19 @@ def AmountTransferProcess(request, account_number):
 
 
 def TransferConfirmation(request, account_number, transaction_id):
-    account = Account.objects.get(account_number=account_number)
-    transaction = Transaction.objects.get(transaction_id=transaction_id)
+    try:
+        account = Account.objects.get(account_number=account_number)
+        transaction = Transaction.objects.get(transaction_id=transaction_id)
 
-    context = {
-        "account":account,
-        "transaction":transaction
-    }
+        context = {
+            "account":account,
+            "transaction":transaction
+        }
 
-    return render(request,"transfer/transfer-confirmation.html", context)
+        return render(request,"transfer/transfer-confirmation.html", context)
+
+    except:
+        messages.warning(request,"Transaction does not exist, Try again later ...")
+        return redirect("account:account")
+
 
