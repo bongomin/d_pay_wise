@@ -133,7 +133,7 @@ def TransferProcess(request, account_number, transaction_id):
             account.save()
 
             messages.success(request, "Transfer Successfull")
-            return redirect("core:transfer-completed")
+            return redirect("core:transfer-completed",account.account_number ,transaction.transaction_id)
 
         else:
             messages.warning(request, "Pin number not correct")
