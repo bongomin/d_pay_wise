@@ -4,6 +4,7 @@ from account.models import Account
 from django.db.models import Q
 from django.contrib import messages
 from core.models import Transaction
+from decimal import Decimal
 
 
 @login_required
@@ -46,7 +47,7 @@ def AmountTransferProcess(request, account_number):
     if request.method == "POST":
         amount = request.POST.get('amount-send')
         description = request.POST.get('description')
-        if sender_account.account_balance > 0 and amount:
+        if sender_account.account_balance >= Decimal(amount):
             new_transaction = Transaction.objects.create(
                 user=request.user,
                 amount=amount,
@@ -88,6 +89,23 @@ def TransferConfirmation(request, account_number, transaction_id):
         messages.warning(request,"Transaction does not exist, Try again later ...")
         return redirect("account:account")
 
+
+def TransferCompleted(request, account_number, transaction_id):
+    try:
+        account = Account.objects.get(account_number=account_number)
+        transaction = Transaction.objects.get(transaction_id=transaction_id)
+
+        context = {
+            "account":account,
+            "transaction":transaction
+        }
+
+        return render(request,"transfer/transfer-completed.html", context)
+
+    except:
+        messages.warning(request,"Transfer does not exist !")
+        return redirect("account:account")
+
 def TransferProcess(request, account_number, transaction_id):
     account = Account.objects.get(account_number=account_number)
     transaction = Transaction.objects.get(transaction_id=transaction_id)
@@ -115,7 +133,7 @@ def TransferProcess(request, account_number, transaction_id):
             account.save()
 
             messages.success(request, "Transfer Successfull")
-            return redirect("account:account")
+            return redirect("core:transfer-completed")
 
         else:
             messages.warning(request, "Pin number not correct")
