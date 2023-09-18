@@ -22,7 +22,7 @@
                             <div class="single-user">
                                 <div class="left d-flex align-items-center">
                                     <div class="img-area">
-                                        <img src="{{account.kyc.image.url}}" style= "width:50px; height:50px; border-radius: 50%; object-fit:cover" alt="profile">
+                                        <img src="{% static '{{account.kyc.image.url}}' %}" style= "width:50px; height:50px; border-radius: 50%; object-fit:cover" alt="profile">
                                     </div>
                                     <div class="text-area">
                                         <p>{{account.kyc.full_name}}</p>
@@ -121,19 +121,18 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
                                         </div>
                                         <div class="main-content">
-                                            <h4>Confirm Transfer!</h4>
-                                            <p>We have sent a verification code on your phone + Number +44831***932. Please enter verification code below</p>
-                                            <form action="javascript:void(0)">
-                                                <div class="userInput">
-                                                    <input type="text">
-                                                    <input type="text">
-                                                    <input type="text">
-                                                    <input type="text">
-                                                </div>
-                                                <a href="javascript:void(0)">Don’t receive a code?</a>
-                                                <button class="mt-60 confirm">Confirm</button>
-                                            </form>
-                                        </div>
+                                                <h4>Confirm Transfer!</h4>
+                                                <p>We have sent a verification code to your phone <span>+44831***932</span>. Please enter the verification code below.</p>
+                                                <form method="POST" action="{% url 'core:transfer-process' account.account_number transaction.transaction_id  %}">
+                                                    {% csrf_token %}
+                                                    <div class="userInput">
+                                                        <input minlength="4" maxlength="4" type="text" name="pin-number">
+                                                    </div>
+                                                    <a href="javascript:void(0)">Don’t receive a code?</a>
+                                                    <button type="submit" class="mt-60 confirm">Confirm</button>
+                                                </form>
+                                            </div>
+
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="success" role="tabpanel" aria-labelledby="success-tab">
