@@ -9,12 +9,16 @@ from django.core.exceptions import ObjectDoesNotExist
 
 @login_required
 def account_view(request):
-    try:
-        kyc = KYC.objects.get(user=request.user)
-    except ObjectDoesNotExist:  # Catch the specific
-        messages.warning(request, "You need to submit your KYC!")
-        return redirect("account:kyc-reg")
-    account = Account.objects.get(user=request.user)
+    if request.user.is_authenticated:
+        try:
+            kyc = KYC.objects.get(user=request.user)
+        except ObjectDoesNotExist:  # Catch the specific
+            messages.warning(request, "You need to submit your KYC!")
+            return redirect("account:kyc-reg")
+        account = Account.objects.get(user=request.user)
+    else:
+        messages.warning(request, "You need to Login to access the dashboard")
+        return redirect("userauth:login-user")
     context = {
         "account": account,
         "kyc": kyc
@@ -56,3 +60,20 @@ def kyc_registration(request):
     }
 
     return render(request, "account/kyc-form.html", context)
+
+def dashboard(request):
+    if request.user.is_authenticated:
+        try:
+            kyc = KYC.objects.get(user=request.user)
+        except ObjectDoesNotExist:  # Catch the specific
+            messages.warning(request, "You need to submit your KYC!")
+            return redirect("account:kyc-reg")
+        account = Account.objects.get(user=request.user)
+    else:
+        messages.warning(request, "You need to Login to access the dashboard")
+        return redirect("userauth:login-user")
+    context = {
+        "account": account,
+        "kyc": kyc
+    }
+    return render(request, "account/dashboard.html", context)
