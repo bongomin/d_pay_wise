@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from account.models import Account
 from django.db.models import Q
 from django.contrib import messages
+from core.models import Transaction
 
 
 @login_required
@@ -32,3 +33,41 @@ def AmountTransfer(request, account_number):
         "account": account
     }
     return render(request,"transfer/amount-transfer.html",context)
+
+
+def AmountTransferProcess(request, account_number):
+    sender = request.user ##current logged in user
+    account = Account.objects.get(account_number=account_number) ## account for current logged in user
+    reciever = account.user ## The person going to receive the money
+
+    sender_account = request.user.account
+    receiver_account = account
+
+    if request.method == "POST":
+        amount = request.POST.get('amount-send')
+        description = request.POST.get('description')
+        if sender_account.account_balance > 0 and amount:
+            new_transaction = Transaction.objects.create(
+                user=request.user,
+                amount=amount,
+                description=description,
+                receiver=reciever,
+                receiver_account=receiver_account,
+                status="processing",
+                transaction_type="transfer"
+
+                )
+
+            new_transaction.save()
+
+            # gettting the new transaction id
+            transaction_id = new_transaction.transaction_id
+            return redirect("core:transfer-confirmation", account.account_number,transaction_id)
+        else:
+            messages.warning(request,"Insufficient Funds ...")
+            return redirect("core:amount-transfer", account.account_number)
+
+    else:
+        messages.warning(request,"error Occured, Try again later ...")
+        return redirect("account:account")
+

@@ -37,11 +37,12 @@
                             </div>
                         </div>
                     </div>
-                    <form action="#">
+                    <form method="POST" action={% url "core:amount-transfer-process" account.account_number %}>
+                    {% csrf_token %}
                         <div class="send-banance">
                             <span class="mdr">You Send</span>
                             <div class="input-area">
-                                <input onkeyup="calculateBalance()" id="amount-send" placeholder="{{request.user.account.account_balance| intcomma}}" type="number">
+                                <input onkeyup="calculateBalance()" id="amount-send" name="amount-send" placeholder="{{request.user.account.account_balance| intcomma}}" type="number">
                                 <select>
                                     <option value="1">USD</option>
                                     <option value="2">USD</option>
@@ -50,7 +51,11 @@
                             </div>
                             <p>Available Balance<b>$ {{request.user.account.account_balance| intcomma}}</b></p>
                             <p id="new_balance"></p>
-                             <p id="error-div" class="text-danger"></p>
+                            <p id="error-div" class="text-danger"></p>
+                        </div>
+                        <div class="send-banance pt-0 mt-0">
+                            <span class="mdr">Payment Description</span>
+                                <input name="description" placeholder="Payment fees" type="text">
                         </div>
                         <ul class="total-fees">
                             <li>Total Fees</li>
@@ -66,7 +71,7 @@
                         </ul>
                         <div class="footer-area mt-40">
                             <a href="pay-step-1.html">Previous Step</a>
-                            <a href="pay-step-3.html" class="active">Next</a>
+                            <button style="padding:10px 30px; border-radiuyou communicacs:10px; background:rgb(98,0,255);color:#fff"  type= "submit"class="active">Next</button>
                         </div>
                     </form>
                 </div>
