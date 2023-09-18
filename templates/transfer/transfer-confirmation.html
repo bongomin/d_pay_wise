@@ -18,24 +18,20 @@
                             <span class="mdr">Step 3 of 3</span>
                             <h5>Confirm Your Transfer</h5>
                         </div>
-                        <div class="user-select">
+                         <div class="user-select">
                             <div class="single-user">
                                 <div class="left d-flex align-items-center">
                                     <div class="img-area">
-                                        <img src="{% static 'assets/images/profile1.jpeg' %}" style= "width:50px; height:50px; border-radius: 50%; object-fit:cover" alt="image">
+                                        <img src="{{account.kyc.image.url}}" style= "width:50px; height:50px; border-radius: 50%; object-fit:cover" alt="profile">
                                     </div>
                                     <div class="text-area">
-                                        <p>Bongomin Daniel</p>
-                                        <span class="mdr"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="541c312639353a6761143339353d387a373b39">bongomindaniel@gmail.com</a></span>
+                                        <p>{{account.kyc.full_name}}</p>
+                                        <span class="mdr">{{account.kyc.email}}</span>
                                     </div>
                                 </div>
                                 <div class="right">
-                                    <a href="javascript:void(0)">
+                                    <a href="{% url "core:search-account"%}">
                                         <i class="icon-g-tick"></i>
-                                        Choose
-                                    </a>
-                                    <a href="javascript:void(0)">
-                                        <i class="icon-h-edit"></i>
                                         Edit
                                     </a>
                                 </div>
@@ -57,27 +53,27 @@
                                 <ul class="details-list">
                                     <li>
                                         <span>You Send</span>
-                                        <b>400.00 GBP</b>
+                                        <b>{{transaction.amount}} USD</b>
                                     </li>
                                     <li>
                                         <span>Recipient gets</span>
-                                        <b>400.00 GBP</b>
+                                        <b>{{transaction.amount}} USD</b>
                                     </li>
                                     <li>
                                         <span>E-mail of receiver</span>
-                                        <b><a href="/cdn-cgi/l/email-protection">bongomindaniel@gmail.com</a></b>
+                                        <b>{{account.user.email}}</b>
                                     </li>
                                     <li>
                                         <span>Fee</span>
                                         <b>Free</b>
                                     </li>
                                     <li>
-                                        <span>Purpose</span>
-                                        <b>Software development</b>
+                                        <span>Purpose | Description</span>
+                                        <b>{{transaction.description}}</b>
                                     </li>
                                     <li>
-                                        <span>Transfer will be receive on </span>
-                                        <b>29 June at 10:0 PM </b>
+                                        <span>Transfer initiated on:</span>
+                                        <b>{{transaction.date}}</b>
                                     </li>
                                 </ul>
                             </div>
