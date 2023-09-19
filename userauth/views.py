@@ -12,21 +12,18 @@ def RegisterUserView(request):
         if form.is_valid():
             new_user = form.save()
             username = form.cleaned_data.get("username")
-            messages.success(
-                request, f"hey {username}your account is successfully created!.")
-            # username = request.POST.get('email')
-            # username = form.cleaned_data.get('email')
-            new_user = authenticate(
-                username=form.cleaned_data['email'], password=form.cleaned_data['password1'])
-            login(request,new_user)
-            return redirect("account:account")
-    if request.user.is_authenticated:
-        messages.warning(
-                request, f"you are already logged in...")
-        return redirect("account:account")
+            messages.success(request, f"Hey {username}, your account is successfully created!")
 
+            new_user = authenticate(username=form.cleaned_data['email'], password=form.cleaned_data['password1'])
+            login(request, new_user)
+            return redirect("account:account")
+
+    if request.user.is_authenticated:
+        messages.warning(request, "You are already logged in.")
+        return redirect("account:account")
     else:
         form = UserRegisterForm()
+
     context = {
         "SignUpForm": form
     }
