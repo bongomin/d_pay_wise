@@ -18,7 +18,5 @@ urlpatterns = [
 
         # transactions
         path('transactions/', transaction.transaction_lists, name='transactions'),
-
-
-
+        path('transaction-detail/<transaction_id>/', transaction.transaction_detail, name='transaction-detail'),
 ]
