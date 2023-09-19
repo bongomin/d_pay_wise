@@ -42,16 +42,17 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {% if sender_transaction.length %}
+                                                {% comment %} {% if sender_transaction.length %} {% endcomment %}
                                                     {% for sender in sender_transaction %}
                                                         <tr data-bs-toggle="modal" data-bs-target="#transactionsMod">
                                                             <th scope="row">
-                                                                <p>{{ sender.receiever.kyc.full_name|title }}</p>
+                                                                <p>{{ sender.receiver.kyc.full_name|title }}</p>
                                                                 <p class="mdr">{{ sender.transaction_type }}</p>
                                                             </th>
                                                             <td>
                                                                 <p><small>{{ sender.date|date:"h:i" }}</small></p>
-                                                                <p class="mdr">{{ sender.status|date:"M D, Y" }}</p>
+
+                                                                <p class="mdr">{{ sender.date|date:"M D, Y" }}</p>
                                                             </td>
                                                             <td>
                                                                 {% if sender.status == "completed" %}
@@ -76,21 +77,21 @@
                                                                 {% endif %}
                                                             </td>
                                                             <td>
-                                                                <p class="mdr">$ {{ sender.amount|intcomma }}</p>
+                                                                <p class="mdr"> - $ {{ sender.amount|intcomma }}</p>
                                                             </td>
                                                             <td>
                                                                 <a href="" class=""><i class="fas fa-eye"></i></a>
                                                             </td>
                                                         </tr>
                                                     {% endfor %}
-                                                {% else %}
+                                                {% comment %} {% else %}
                                                     <tr>
                                                         <td colspan="6" class="text-center p-5">
                                                             <i class="fas fa-info-circle fa-3x"></i>
                                                             <p>No Sent Transactions</p>
                                                         </td>
                                                     </tr>
-                                                {% endif %}
+                                                {% endif %} {% endcomment %}
                                             </tbody>
                                         </table>
                                     </div>
@@ -108,37 +109,56 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            {% if receiver_transaction.length %}
+                                            {% comment %} {% if receiver_transaction.length %} {% endcomment %}
                                                 {% for receiver in receiver_transaction %}
                                                 <tr data-bs-toggle="modal" data-bs-target="#transactionsMod">
                                                     <th scope="row">
-                                                        <p>Bangkok Bank</p>
-                                                        <p class="mdr">Withdraw to bank account</p>
+                                                        <p>{{receiver.receiver.kyc.full_name|title }}</p>
+                                                        <p class="mdr">{{ receiver.transaction_type }}</p>
                                                     </th>
                                                     <td>
-                                                        <p>03:00 PM</p>
-                                                        <p class="mdr">10 Mar 2022</p>
+                                                        <p><small>{{ receiver.date|date:"h:i" }}</small></p>
+
+                                                        <p class="mdr">{{ receiver.date|date:"M D, Y" }}</p>
                                                     </td>
                                                     <td>
-                                                        <p class="inprogress">In Progress</p>
+                                                        {% if receiver.status == "completed" %}
+                                                            <p class="text-success">
+                                                                {{ receiver.status|title }}
+                                                            </p>
+                                                        {% endif %}
+                                                        {% if receiver.status == "pending" %}
+                                                            <p class="inprogress">
+                                                                {{ receiver.status|title }}
+                                                            </p>
+                                                        {% endif %}
+                                                        {% if receiver.status == "failed" %}
+                                                            <p class="danger">
+                                                                {{ receiver.status|title }}
+                                                            </p>
+                                                        {% endif %}
+                                                        {% if receiver.status == "processing" %}
+                                                            <p class="inprogress">
+                                                                {{ receiver.status|title }}
+                                                            </p>
+                                                        {% endif %}
                                                     </td>
                                                     <td>
-                                                        <p>-$520</p>
-                                                        <p class="mdr">$3.0</p>
+                                                        <p class="mdr"> + $ {{ receiver.amount|intcomma }}</p>
                                                     </td>
                                                     <td>
                                                         <a href="" class=""><i class="fas fa-eye"></i></a>
                                                     </td>
                                                 </tr>
                                                 {% endfor %}
-                                                {% else %}
+                                                {% comment %} {% else %}
                                                     <tr>
                                                         <td colspan="6" class="text-center p-5">
                                                             <i class="fas fa-info-circle fa-3x"></i>
                                                             <p>No Recieved Transactions</p>
                                                         </td>
                                                     </tr>
-                                                {% endif %}
+                                                {% endif %} {% endcomment %}
                                             </tbody>
                                         </table>
                                     </div>
