@@ -70,9 +70,10 @@
                                 </div>
                             </div>
                             {% empty %}
-                            <div>
-                                    <h2>No Account Found.<h2/>
-                            <div/>
+                            <div class="text-center p-5">
+                                <h2>No Account Found.</h2>
+                                <i class="fas fa-exclamation-triangle fa-3x"></i> 
+                            </div>
                             {% endfor %}
                     {% else %}
                     <p> Search Accounts <p/>
