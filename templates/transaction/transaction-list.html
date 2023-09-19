@@ -42,46 +42,55 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {% for sender in sender_transaction %}
-                                                <tr data-bs-toggle="modal" data-bs-target="#transactionsMod">
-                                                    <th scope="row">
-                                                        <p>{{ sender.receiever.kyc.full_name|title }}</p>
-                                                        <p class="mdr">{{ sender.transaction_type }}</p>
-                                                    </th>
-                                                    <td>
-                                                        <p><small>{{ sender.date|date:"h:i" }}</small></p>
-                                                        <p class="mdr">{{ sender.status|date:"M D, Y" }}</p>
-                                                    </td>
-                                                    <td>
-                                                        {% if sender.status == "completed" %}
-                                                        <p class="text-success">
-                                                            {{ sender.status|title }}
-                                                        </p>
-                                                        {% endif %}
-                                                        {% if sender.status == "pending" %}
-                                                        <p class="inprogress">
-                                                            {{ sender.status|title }}
-                                                        </p>
-                                                        {% endif %}
-                                                        {% if sender.status == "failed" %}
-                                                        <p class="danger">
-                                                            {{ sender.status|title }}
-                                                        </p>
-                                                        {% endif %}
-                                                        {% if sender.status == "processing" %}
-                                                        <p class="inprogress">
-                                                            {{ sender.status|title }}
-                                                        </p>
-                                                        {% endif %}
-                                                    </td>
-                                                    <td>
-                                                        <p class="mdr">$ {{ sender.amount|intcomma }}</p>
-                                                    </td>
-                                                    <td>
-                                                        <a href="" class=""><i class="fas fa-eye"></i></a>
-                                                    </td>
-                                                </tr>
-                                                {% endfor %}
+                                                {% if sender_transaction.length %}
+                                                    {% for sender in sender_transaction %}
+                                                        <tr data-bs-toggle="modal" data-bs-target="#transactionsMod">
+                                                            <th scope="row">
+                                                                <p>{{ sender.receiever.kyc.full_name|title }}</p>
+                                                                <p class="mdr">{{ sender.transaction_type }}</p>
+                                                            </th>
+                                                            <td>
+                                                                <p><small>{{ sender.date|date:"h:i" }}</small></p>
+                                                                <p class="mdr">{{ sender.status|date:"M D, Y" }}</p>
+                                                            </td>
+                                                            <td>
+                                                                {% if sender.status == "completed" %}
+                                                                    <p class="text-success">
+                                                                        {{ sender.status|title }}
+                                                                    </p>
+                                                                {% endif %}
+                                                                {% if sender.status == "pending" %}
+                                                                    <p class="inprogress">
+                                                                        {{ sender.status|title }}
+                                                                    </p>
+                                                                {% endif %}
+                                                                {% if sender.status == "failed" %}
+                                                                    <p class="danger">
+                                                                        {{ sender.status|title }}
+                                                                    </p>
+                                                                {% endif %}
+                                                                {% if sender.status == "processing" %}
+                                                                    <p class="inprogress">
+                                                                        {{ sender.status|title }}
+                                                                    </p>
+                                                                {% endif %}
+                                                            </td>
+                                                            <td>
+                                                                <p class="mdr">$ {{ sender.amount|intcomma }}</p>
+                                                            </td>
+                                                            <td>
+                                                                <a href="" class=""><i class="fas fa-eye"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <tr>
+                                                        <td colspan="6" class="text-center p-5">
+                                                            <i class="fas fa-info-circle fa-3x"></i>
+                                                            <p>No Sent Transactions</p>
+                                                        </td>
+                                                    </tr>
+                                                {% endif %}
                                             </tbody>
                                         </table>
                                     </div>
@@ -99,6 +108,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            {% if receiver_transaction.length %}
                                                 {% for receiver in receiver_transaction %}
                                                 <tr data-bs-toggle="modal" data-bs-target="#transactionsMod">
                                                     <th scope="row">
@@ -121,6 +131,14 @@
                                                     </td>
                                                 </tr>
                                                 {% endfor %}
+                                                {% else %}
+                                                    <tr>
+                                                        <td colspan="6" class="text-center p-5">
+                                                            <i class="fas fa-info-circle fa-3x"></i>
+                                                            <p>No Recieved Transactions</p>
+                                                        </td>
+                                                    </tr>
+                                                {% endif %}
                                             </tbody>
                                         </table>
                                     </div>
