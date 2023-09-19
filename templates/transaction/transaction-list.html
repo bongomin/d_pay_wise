@@ -42,7 +42,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {% comment %} {% if sender_transaction.length %} {% endcomment %}
+                                                {% if sender_transaction %}
                                                     {% for sender in sender_transaction %}
                                                         <tr data-bs-toggle="modal" data-bs-target="#transactionsMod">
                                                             <th scope="row">
@@ -87,14 +87,14 @@
                                                             </td>
                                                         </tr>
                                                     {% endfor %}
-                                                {% comment %} {% else %}
+                                                {% else %}
                                                     <tr>
                                                         <td colspan="6" class="text-center p-5">
                                                             <i class="fas fa-info-circle fa-3x"></i>
                                                             <p>No Sent Transactions</p>
                                                         </td>
                                                     </tr>
-                                                {% endif %} {% endcomment %}
+                                                {% endif %}
                                             </tbody>
                                         </table>
                                     </div>
@@ -112,7 +112,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            {% comment %} {% if receiver_transaction.length %} {% endcomment %}
+                                            {% if receiver_transaction %}
                                                 {% for receiver in receiver_transaction %}
                                                 <tr data-bs-toggle="modal" data-bs-target="#transactionsMod">
                                                     <th scope="row">
@@ -156,14 +156,14 @@
                                                     </td>
                                                 </tr>
                                                 {% endfor %}
-                                                {% comment %} {% else %}
+                                                {% else %}
                                                     <tr>
                                                         <td colspan="6" class="text-center p-5">
                                                             <i class="fas fa-info-circle fa-3x"></i>
                                                             <p>No Recieved Transactions</p>
                                                         </td>
                                                     </tr>
-                                                {% endif %} {% endcomment %}
+                                                {% endif %}
                                             </tbody>
                                         </table>
                                     </div>
