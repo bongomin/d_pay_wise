@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from account.models import Account
+from account.models import Account,KYC
 from django.db.models import Q
 from django.contrib import messages
 from core.models import Transaction
@@ -12,6 +12,9 @@ def search_user_by_account_number(request):
     # accounts = Account.objects.filter(account_status="active")
     accounts = Account.objects.all()
     query = request.POST.get('account_number')
+    kyc = KYC.objects.get(user=request.user)
+    account = Account.objects.get(user=request.user)
+
     if query:
         accounts = accounts.filter(
             Q(account_number=query)|
@@ -20,7 +23,9 @@ def search_user_by_account_number(request):
 
     context = {
         "accounts": accounts,
-        "query": query
+        "query": query,
+        "kyc": kyc,
+        "account": account
     }
     return render(request, "transfer/searchUserByAccountNumber.html", context)
 
@@ -94,10 +99,12 @@ def TransferCompleted(request, account_number, transaction_id):
     try:
         account = Account.objects.get(account_number=account_number)
         transaction = Transaction.objects.get(transaction_id=transaction_id)
+        kyc = KYC.objects.get(user=request.user)
 
         context = {
             "account":account,
-            "transaction":transaction
+            "transaction":transaction,
+            "kyc":kyc
         }
 
         return render(request,"transfer/transfer-completed.html", context)
