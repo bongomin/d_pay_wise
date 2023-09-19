@@ -66,7 +66,7 @@
                                                                     </p>
                                                                 {% endif %}
                                                                 {% if sender.status == "failed" %}
-                                                                    <p class="danger">
+                                                                    <p class="text-danger">
                                                                         {{ sender.status|title }}
                                                                     </p>
                                                                 {% endif %}
@@ -77,10 +77,13 @@
                                                                 {% endif %}
                                                             </td>
                                                             <td>
-                                                                <p class="mdr"> - $ {{ sender.amount|intcomma }}</p>
+                                                                <p class="mdr"> <span class="text-danger"> - </span> $ {{ sender.amount|intcomma }}</p>
                                                             </td>
                                                             <td>
-                                                                <a href="" class=""><i class="fas fa-eye"></i></a>
+                                                                <a href="{% url 'core:transaction-detail' transaction_id=sender.transaction_id %}" class="">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </a>
+
                                                             </td>
                                                         </tr>
                                                     {% endfor %}
@@ -147,7 +150,9 @@
                                                         <p class="mdr"> + $ {{ receiver.amount|intcomma }}</p>
                                                     </td>
                                                     <td>
-                                                        <a href="" class=""><i class="fas fa-eye"></i></a>
+                                                        <a href="{% url 'core:transaction-detail' transaction_id=receiver.transaction_id %}" class="">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </a>
                                                     </td>
                                                 </tr>
                                                 {% endfor %}
