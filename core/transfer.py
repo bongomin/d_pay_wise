@@ -9,10 +9,9 @@ from decimal import Decimal
 
 @login_required
 def search_user_by_account_number(request):
-    # accounts = Account.objects.filter(account_status="active")
-    accounts = Account.objects.all()
-    query = request.POST.get('account_number')
     kyc = KYC.objects.get(user=request.user)
+    accounts = Account.objects.exclude(account_number=kyc.account.account_number)
+    query = request.POST.get('account_number')
     account = Account.objects.get(user=request.user)
 
     if query:
@@ -31,12 +30,16 @@ def search_user_by_account_number(request):
 
 def AmountTransfer(request, account_number):
     try:
-        account = Account.objects.get(account_number=account_number)
+        transfer_to_account = Account.objects.get(account_number=account_number)
+        account = Account.objects.get(user=request.user)
+        kyc = KYC.objects.get(user=request.user)
     except:
         messages.warning(request,"Account does not exists")
         return redirect("core:search-account")
     context = {
-        "account": account
+        "transfer_to_account": transfer_to_account,
+        "kyc": kyc,
+        "account":account
     }
     return render(request,"transfer/amount-transfer.html",context)
 
@@ -104,7 +107,6 @@ def TransferCompleted(request, account_number, transaction_id):
         context = {
             "account":account,
             "transaction":transaction,
-            "kyc":kyc
         }
 
         return render(request,"transfer/transfer-completed.html", context)
