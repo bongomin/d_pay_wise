@@ -28,7 +28,6 @@ def SearchUserRequest(request):
 
     return render(request, "payment_request/search-users.html", context)
 
-
 def AmountRequest(request,account_number):
     account = Account.objects.get(account_number=account_number)
     kyc = KYC.objects.get(user=request.user)
@@ -64,10 +63,29 @@ def AmountRequestProcess(request,account_number):
 
         new_request.save()
         transaction_id = new_request.transaction_id
-        return redirect("core:request-confirmation",account.account_number, transaction_id)
+        account_number = account.account_number
+        return redirect("core:amount-request-process-confirmation", account_number, transaction_id)
 
     else:
         messages.warning(request, "Error Occured,Try again later")
         return redirect("core:dashboard")
 
+def AmountRequestConfirmation(request, account_number, transaction_id):
+    try:
+        account = Account.objects.get(account_number=account_number)
+        transaction = Transaction.objects.get(transaction_id=transaction_id)
+        kyc = KYC.objects.get(user=request.user)
+
+
+        context = {
+            "account":account,
+            "transaction":transaction,
+            "kyc":kyc
+        }
+
+        return render(request, "payment_request/amount-request-confirmation.html", context)
+
+    except:
+        messages.warning(request,"Transaction does not exist, Try again later ...")
+        return redirect("account:account")
 
