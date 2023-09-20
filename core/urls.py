@@ -21,4 +21,6 @@ urlpatterns = [
 
         # Request Payments
         path('search-user-account/', payment_requests.SearchUserRequest, name='search-user-account'),
+        path('amount-request/<account_number>/', payment_requests.AmountRequest, name='amount-request'),
+        path('amount-request-process/<account_number>/', payment_requests.AmountRequestProcess, name='amount-request-process'),
 ]
