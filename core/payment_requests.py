@@ -38,36 +38,45 @@ def AmountRequest(request,account_number):
 
     return render(request, "payment_request/amount-request.html", context)
 
-def AmountRequestProcess(request,account_number):
-    account = Account.objects.get(account_number=account_number)
-    sender = request.user
-    receiver = account.user
-    sender_account = request.user.account
-    receiver_account = account
+def AmountRequestProcess(request, account_number):
+    try:
+        account = get_object_or_404(Account, account_number=account_number)
+        sender = request.user
+        receiver = account.user
+        sender_account = request.user.account
+        receiver_account = account
 
-    if request.method == "POST":
-        amount = request.POST.get("amount-request")
-        description = request.POST.get("description")
+        if request.method == "POST":
+            amount = request.POST.get("amount-request")
+            description = request.POST.get("description")
 
-        new_request = Transaction.objects.create(
-            user=request.user,
-            amount=amount,
-            description=description,
-            sender=sender,
-            receiver=receiver,
-            sender_account=sender_account,
-            receiver_account=receiver_account,
-            status="request_processing",
-            transaction_type="request"
-        )
+            new_request = Transaction.objects.create(
+                user=request.user,
+                amount=amount,
+                description=description,
+                sender=sender,
+                receiver=receiver,
+                sender_account=sender_account,
+                receiver_account=receiver_account,
+                status="request_processing",
+                transaction_type="request"
+            )
+            new_request.save()
 
-        new_request.save()
-        transaction_id = new_request.transaction_id
-        account_number = account.account_number
-        return redirect("core:amount-request-process-confirmation", account_number, transaction_id)
+            transaction_id = new_request.transaction_id
+            account_number = account.account_number
+            return redirect("core:amount-request-process-confirmation", account_number, transaction_id)
 
-    else:
-        messages.warning(request, "Error Occured,Try again later")
+        else:
+            messages.warning(request, "Error occurred. Please try again later.")
+            return redirect("core:dashboard")
+
+    except Account.DoesNotExist:
+        messages.error(request, "Invalid account number.")
+        return redirect("core:dashboard")
+
+    except Exception as e:
+        messages.error(request, f"An error occurred: {str(e)}")
         return redirect("core:dashboard")
 
 def AmountRequestConfirmation(request, account_number, transaction_id):
