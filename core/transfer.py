@@ -83,11 +83,15 @@ def AmountTransferProcess(request, account_number):
 
 def TransferConfirmation(request, account_number, transaction_id):
     try:
-        account = Account.objects.get(account_number=account_number)
+        transfer_to_account = Account.objects.get(account_number=account_number)
         transaction = Transaction.objects.get(transaction_id=transaction_id)
+        account = Account.objects.get(user=request.user)
+        kyc = KYC.objects.get(user=request.user)
 
         context = {
+            "transfer_to_account":transfer_to_account,
             "account":account,
+            "kyc": kyc,
             "transaction":transaction
         }
 
