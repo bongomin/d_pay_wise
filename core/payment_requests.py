@@ -29,10 +29,12 @@ def SearchUserRequest(request):
     return render(request, "payment_request/search-users.html", context)
 
 def AmountRequest(request,account_number):
-    account = Account.objects.get(account_number=account_number)
+    request_account = Account.objects.get(account_number=account_number)
+    account = Account.objects.get(user=request.user)
     kyc = KYC.objects.get(user=request.user)
     context = {
-        "account": account,
+        "request_account": request_account,
+        "account":account,
         "kyc":kyc
     }
 
@@ -75,27 +77,32 @@ def AmountRequestProcess(request, account_number):
         messages.error(request, "Invalid account number.")
         return redirect("core:dashboard")
 
-    except Exception as e:
-        messages.error(request, f"An error occurred: {str(e)}")
-        return redirect("core:dashboard")
-
 def AmountRequestConfirmation(request, account_number, transaction_id):
     try:
-        account = Account.objects.get(account_number=account_number)
-        transaction = Transaction.objects.get(transaction_id=transaction_id)
-        kyc = KYC.objects.get(user=request.user)
-
+        request_account = get_object_or_404(Account, account_number=account_number)
+        transaction = get_object_or_404(Transaction, transaction_id=transaction_id)
+        account = get_object_or_404(Account, user=request.user)
+        kyc = get_object_or_404(KYC, user=request.user)
 
         context = {
-            "account":account,
-            "transaction":transaction,
-            "kyc":kyc
+            "request_account": request_account,
+            "transaction": transaction,
+            "account": account,
+            "kyc": kyc
         }
 
         return render(request, "payment_request/amount-request-confirmation.html", context)
 
-    except:
-        messages.warning(request,"Transaction does not exist, Try again later ...")
+    except Transaction.DoesNotExist:
+        messages.warning(request, "Transaction does not exist. Please try again later.")
+        return redirect("account:account")
+
+    except Account.DoesNotExist:
+        messages.warning(request, "Account does not exist. Please try again later.")
+        return redirect("account:account")
+
+    except KYC.DoesNotExist:
+        messages.warning(request, "KYC information does not exist. Please try again later.")
         return redirect("account:account")
 
 def AmountRequestFinalProcess(request, account_number, transaction_id):

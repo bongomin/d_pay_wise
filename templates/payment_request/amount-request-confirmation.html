@@ -22,11 +22,11 @@
                             <div class="single-user">
                                 <div class="left d-flex align-items-center">
                                     <div class="img-area">
-                                    <img style= "width:50px; height:50px; border-radius: 50%; object-fit:cover;" src="{{ account.kyc.image.url }}" alt="image">
+                                    <img style= "width:50px; height:50px; border-radius: 50%; object-fit:cover;" src="{{ request_account.kyc.image.url }}" alt="image">
                                     </div>
                                     <div class="text-area">
-                                        <p>{{account.kyc.full_name}}</p>
-                                        <span class="mdr">{{account.kyc.email}}</span>
+                                        <p>{{request_account.kyc.full_name}}</p>
+                                        <span class="mdr">{{request_account.kyc.email}}</span>
                                     </div>
                                 </div>
                                 <div class="right">
@@ -57,7 +57,7 @@
                                     </li>
                                     <li>
                                         <span>Requested from</span>
-                                        <b>{{account.user.kyc.full_name |title}}</b>
+                                        <b>{{request_account.user.kyc.full_name |title}}</b>
                                     </li>
                                     <li>
                                         <span>Fee</span>
@@ -119,7 +119,7 @@
                                         <div class="main-content">
                                                 <h4>Confirm  Your Request.</h4>
                                                 <p>We have sent a verification code to your phone <span>+44831***932</span>. Please enter the verification code below.</p>
-                                                <form action="{% url "core:amount-request-final-process" account.account_number transaction.transaction_id %}" method="POST">
+                                                <form action="{% url "core:amount-request-final-process" request_account.account_number transaction.transaction_id %}" method="POST">
                                                     {% csrf_token %}
                                                     <div class="userInput">
                                                         <input minlength="4" maxlength="4" type="text" name="pin-number">
