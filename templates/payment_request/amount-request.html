@@ -1,0 +1,97 @@
+{% extends "partials/dashboard-base.html" %}
+{% load static %}
+{% load humanize%}
+{% block content %}
+    <section class="dashboard-section body-collapse pay step step-2">
+        <div class="overlay pt-120">
+            <div class="container-fruid">
+                <div class="main-content">
+                    <div class="head-area d-flex align-items-center justify-content-between">
+                        <h4>Request Payment</h4>
+                        <div class="icon-area">
+                            <i class="fas fa-question-circle fa-2x"></i>
+                        </div>
+                    </div>
+                    <div class="choose-recipient">
+                        <div class="step-area">
+                            <span class="mdr">Step 2 of 3</span>
+                            <h5>Set Amount of request</h5>
+                        </div>
+                        <div class="user-select">
+                            <div class="single-user">
+                                <div class="left d-flex align-items-center">
+                                    <div class="img-area">
+                                        <img src="{{account.kyc.image.url}}" style= "width:50px; height:50px; border-radius: 50%; object-fit:cover" alt="profile">
+                                    </div>
+                                    <div class="text-area">
+                                        <p>{{account.kyc.full_name}}</p>
+                                        <span class="mdr">{{account.kyc.email}}</span>
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <a href="{% url "core:search-user-account"%}">
+                                        <i class="icon-g-tick"></i>
+                                        Edit
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form method="POST" action={% url "core:amount-request-process" account.account_number %}>
+                    {% csrf_token %}
+                        <div class="send-banance">
+                            <span class="mdr">You request (amount)</span>
+                            <div class="input-area">
+                                <input id="amount-request" name="amount-request" placeholder="Enter Amount to request" type="number">
+                                <select>
+                                    <option value="1">USD</option>
+                                    <option value="2">USD</option>
+                                    <option value="3">USD</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="send-banance pt-0 mt-0">
+                            <span class="mdr">Request Description</span>
+                                <input name="description" placeholder="ie Requesting money for school fees" type="text">
+                        </div>
+                        <div class="footer-area mt-40">
+                            <a href="{% url "core:search-user-account"%}">Previous Step</a>
+                            <button style="padding:10px 30px; border-radiuyou communicacs:10px; background:rgb(98,0,255);color:#fff"  type= "submit"class="active">Next</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% comment %} Javascript methods {% endcomment %}
+<script>
+function calculateBalance() {
+    // Get current account balance for the user
+    let availableBalance = parseFloat("{{ request.user.account.account_balance }}");
+    let newBalanceElement = document.getElementById("new_balance");
+    let sendAmountInput = document.getElementById("amount-send");
+    let sendAmount = parseFloat(sendAmountInput.value);
+
+    let errorDiv = document.getElementById("error-div");
+    let totalToPay = document.getElementById("total-to-pay");
+
+    if (isNaN(availableBalance) || isNaN(sendAmount)) {
+        errorDiv.innerHTML = "Please enter valid numeric values.";
+        return;
+    }
+
+    let calculatedNewBalance = availableBalance - sendAmount;
+
+    if (calculatedNewBalance < 0) {
+        newBalanceElement.style.color = "red";
+        errorDiv.innerHTML = "You can only send up to $" + availableBalance.toLocaleString();
+    } else {
+        newBalanceElement.style.color = "green";
+        errorDiv.innerHTML = "";
+    }
+
+    newBalanceElement.innerHTML = `Remaining balance is: <b>$${calculatedNewBalance.toLocaleString()}</b>`;
+    totalToPay.innerHTML = `USD: <b>$${sendAmount.toLocaleString()}</b>`;
+}
+</script>
+ {% endblock content %}
