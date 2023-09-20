@@ -22,11 +22,11 @@
                             <div class="single-user">
                                 <div class="left d-flex align-items-center">
                                     <div class="img-area">
-                                        <img src="{% static '{{account.kyc.image.url}}' %}" style= "width:50px; height:50px; border-radius: 50%; object-fit:cover" alt="profile">
+                                        <img src="{{transfer_to_account.kyc.image.url}}" style= "width:50px; height:50px; border-radius: 50%; object-fit:cover" alt="profile">
                                     </div>
                                     <div class="text-area">
-                                        <p>{{account.kyc.full_name}}</p>
-                                        <span class="mdr">{{account.kyc.email}}</span>
+                                        <p>{{transfer_to_account.kyc.full_name}}</p>
+                                        <span class="mdr">{{transfer_to_account.kyc.email}}</span>
                                     </div>
                                 </div>
                                 <div class="right">
@@ -61,7 +61,7 @@
                                     </li>
                                     <li>
                                         <span>E-mail of receiver</span>
-                                        <b>{{account.user.email}}</b>
+                                        <b>{{transfer_to_account.user.email}}</b>
                                     </li>
                                     <li>
                                         <span>Fee</span>
@@ -123,7 +123,7 @@
                                         <div class="main-content">
                                                 <h4>Confirm Transfer!</h4>
                                                 <p>We have sent a verification code to your phone <span>+44831***932</span>. Please enter the verification code below.</p>
-                                                <form method="POST" action="{% url 'core:transfer-process' account.account_number transaction.transaction_id  %}">
+                                                <form method="POST" action="{% url 'core:transfer-process' transfer_to_account.account_number transaction.transaction_id  %}">
                                                     {% csrf_token %}
                                                     <div class="userInput">
                                                         <input minlength="4" maxlength="4" type="text" name="pin-number">

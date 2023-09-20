@@ -15,19 +15,25 @@
                                 <p>Updated every several minutes</p>
                             </div>
                             <div class="top-area d-flex align-items-center justify-content-between">
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="latest-tab" data-bs-toggle="tab" data-bs-target="#latest" type="button" role="tab" aria-controls="latest" aria-selected="true">Sent</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="upcoming-tab" data-bs-toggle="tab" data-bs-target="#upcoming" type="button" role="tab" aria-controls="upcoming" aria-selected="false">Received</button>
-                                    </li>
-                                </ul>
-                                <div class="view-all d-flex align-items-center">
-                                    <a href="javascript:void(0)">View All</a>
-                                    <img src="{% static 'assets1/images/icon/right-arrow.png' %}" alt="icon">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="latest-tab" data-bs-toggle="tab" data-bs-target="#latest" type="button" role="tab" aria-controls="latest" aria-selected="true">Sent Transfer</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="upcoming-tab" data-bs-toggle="tab" data-bs-target="#upcoming" type="button" role="tab" aria-controls="upcoming" aria-selected="false">Received Transfer</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="sender-request-tab" data-bs-toggle="tab" data-bs-target="#sender-request" type="button" role="tab" aria-controls="sender-request" aria-selected="false">Sent Requests</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="receiver-request-tab" data-bs-toggle="tab" data-bs-target="#receiver-request" type="button" role="tab" aria-controls="receiver-request" aria-selected="false">Received Requests</button>
+                                        </li>
+                                    </ul>
+                                    <div class="view-all d-flex align-items-center ms-3">
+                                        <a href="javascript:void(0)" class="me-2">View All</a>
+                                        <img src="{% static 'assets1/images/icon/right-arrow.png' %}" alt="icon" style="width: 20px;">
+                                    </div>
                                 </div>
-                            </div>
                             <div class="tab-content mt-40">
                                 <div class="tab-pane fade show active" id="latest" role="tabpanel" aria-labelledby="latest-tab">
                                     <div class="table-responsive">
@@ -42,6 +48,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            sendddd
+                                            {{sender_transaction}}
                                                 {% if sender_transaction %}
                                                     {% for sender in sender_transaction %}
                                                         <tr data-bs-toggle="modal" data-bs-target="#transactionsMod">
@@ -168,6 +176,177 @@
                                         </table>
                                     </div>
                                 </div>
+
+                                <div class="tab-pane fade" id="sender-request" role="tabpanel" aria-labelledby="sender-request-tab">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Name/ Bussiness</th>
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col">Amount</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% if request_sender_transaction %}
+                                                {% for receiver in request_sender_transaction %}
+                                                <tr data-bs-toggle="modal" data-bs-target="#transactionsMod">
+                                                    <th scope="row">
+                                                        <p>{{receiver.receiver.kyc.full_name|title }}</p>
+                                                        <p class="mdr">{{ receiver.transaction_type }}</p>
+                                                    </th>
+                                                    <td>
+                                                        <p><small>{{ receiver.date|date:"h:i" }}</small></p>
+
+                                                        <p class="mdr">{{ receiver.date|date:"M D, Y" }}</p>
+                                                    </td>
+                                                    <td>
+                                                        {% if receiver.status == "completed" %}
+                                                            <p class="text-success">
+                                                                {{ receiver.status|title }}
+                                                            </p>
+                                                        {% endif %}
+                                                        {% if receiver.status == "request_sent" %}
+                                                            <p class="text-success">
+                                                                {{ receiver.status|title }}
+                                                            </p>
+                                                        {% endif %}
+                                                        {% if receiver.status == "request_settled" %}
+                                                            <p class="text-success">
+                                                                {{ receiver.status|title }}
+                                                            </p>
+                                                        {% endif %}
+                                                        {% if receiver.status == "request_processing" %}
+                                                            <p class="text-warning">
+                                                                {{ receiver.status|title }}
+                                                            </p>
+                                                        {% endif %}
+                                                        {% if receiver.status == "pending" %}
+                                                            <p class="inprogress">
+                                                                {{ receiver.status|title }}
+                                                            </p>
+                                                        {% endif %}
+                                                        {% if receiver.status == "failed" %}
+                                                            <p class="danger">
+                                                                {{ receiver.status|title }}
+                                                            </p>
+                                                        {% endif %}
+                                                        {% if receiver.status == "processing" %}
+                                                            <p class="inprogress">
+                                                                {{ receiver.status|title }}
+                                                            </p>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        <p class="mdr"> + $ {{ receiver.amount|intcomma }}</p>
+                                                    </td>
+                                                    <td>
+                                                        <a href="{% url 'core:transaction-detail' transaction_id=receiver.transaction_id %}" class="">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </a>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                                {% else %}
+                                                    <tr>
+                                                        <td colspan="6" class="text-center p-5">
+                                                            <i class="fas fa-info-circle fa-3x"></i>
+                                                            <p>No Recieved Transactions</p>
+                                                        </td>
+                                                    </tr>
+                                                {% endif %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="receiver-request" role="tabpanel" aria-labelledby="receiver-request-tab">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Name/ Reciever Request</th>
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col">Amount</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% if request_reciever_transaction %}
+                                                {% for receiver in request_reciever_transaction %}
+                                                <tr data-bs-toggle="modal" data-bs-target="#transactionsMod">
+                                                    <th scope="row">
+                                                        <p>{{receiver.receiver.kyc.full_name|title }}</p>
+                                                        <p class="mdr">{{ receiver.transaction_type }}</p>
+                                                    </th>
+                                                    <td>
+                                                        <p><small>{{ receiver.date|date:"h:i" }}</small></p>
+
+                                                        <p class="mdr">{{ receiver.date|date:"M D, Y" }}</p>
+                                                    </td>
+                                                    <td>
+                                                        {% if receiver.status == "completed" %}
+                                                            <p class="text-success">
+                                                                {{ receiver.status|title }}
+                                                            </p>
+                                                        {% endif %}
+                                                        {% if receiver.status == "request_sent" %}
+                                                            <p class="text-success">
+                                                                {{ receiver.status|title }}
+                                                            </p>
+                                                        {% endif %}
+                                                        {% if receiver.status == "request_settled" %}
+                                                            <p class="text-success">
+                                                                {{ receiver.status|title }}
+                                                            </p>
+                                                        {% endif %}
+                                                        {% if receiver.status == "resquest_processing" %}
+                                                            <p class="text-warning">
+                                                                {{ receiver.status|title }}
+                                                            </p>
+                                                        {% endif %}
+                                                        {% if receiver.status == "pending" %}
+                                                            <p class="inprogress">
+                                                                {{ receiver.status|title }}
+                                                            </p>
+                                                        {% endif %}
+                                                        {% if receiver.status == "failed" %}
+                                                            <p class="danger">
+                                                                {{ receiver.status|title }}
+                                                            </p>
+                                                        {% endif %}
+                                                        {% if receiver.status == "processing" %}
+                                                            <p class="inprogress">
+                                                                {{ receiver.status|title }}
+                                                            </p>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        <p class="mdr"> + $ {{ receiver.amount|intcomma }}</p>
+                                                    </td>
+                                                    <td>
+                                                        <a href="{% url 'core:transaction-detail' transaction_id=receiver.transaction_id %}" class="">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </a>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                                {% else %}
+                                                    <tr>
+                                                        <td colspan="6" class="text-center p-5">
+                                                            <i class="fas fa-info-circle fa-3x"></i>
+                                                            <p>No Recieved Transactions</p>
+                                                        </td>
+                                                    </tr>
+                                                {% endif %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
