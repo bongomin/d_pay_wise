@@ -21,11 +21,11 @@
                             <div class="single-user">
                                 <div class="left d-flex align-items-center">
                                     <div class="img-area">
-                                        <img src="{{account.kyc.image.url}}" style= "width:50px; height:50px; border-radius: 50%; object-fit:cover" alt="profile">
+                                        <img src="{{transfer_to_account.kyc.image.url}}" style= "width:50px; height:50px; border-radius: 50%; object-fit:cover" alt="profile">
                                     </div>
                                     <div class="text-area">
-                                        <p>{{account.kyc.full_name}}</p>
-                                        <span class="mdr">{{account.kyc.email}}</span>
+                                        <p>{{transfer_to_account.kyc.full_name}}</p>
+                                        <span class="mdr">{{transfer_to_account.kyc.email}}</span>
                                     </div>
                                 </div>
                                 <div class="right">
@@ -37,12 +37,12 @@
                             </div>
                         </div>
                     </div>
-                    <form method="POST" action={% url "core:amount-transfer-process" account.account_number %}>
+                    <form method="POST" action={% url "core:amount-transfer-process" transfer_to_account.account_number %}>
                     {% csrf_token %}
                         <div class="send-banance">
                             <span class="mdr">You Send</span>
                             <div class="input-area">
-                                <input onkeyup="calculateBalance()" id="amount-send" name="amount-send" placeholder="{{request.user.account.account_balance| intcomma}}" type="number">
+                                <input onkeyup="calculateBalance()" id="amount-send" name="amount-send" placeholder="{{request.user.transfer_to_account.account_balance| intcomma}}" type="number">
                                 <select>
                                     <option value="1">USD</option>
                                     <option value="2">USD</option>
