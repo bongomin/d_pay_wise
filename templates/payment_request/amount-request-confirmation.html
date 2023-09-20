@@ -119,7 +119,7 @@
                                         <div class="main-content">
                                                 <h4>Confirm  Your Request.</h4>
                                                 <p>We have sent a verification code to your phone <span>+44831***932</span>. Please enter the verification code below.</p>
-                                                <form method="POST">
+                                                <form action="{% url "core:amount-request-final-process" account.account_number transaction.transaction_id %}" method="POST">
                                                     {% csrf_token %}
                                                     <div class="userInput">
                                                         <input minlength="4" maxlength="4" type="text" name="pin-number">

@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render
 from django.db.models import Q
-
+from django.shortcuts import get_object_or_404
 
 @login_required
 def SearchUserRequest(request):
@@ -57,7 +57,7 @@ def AmountRequestProcess(request,account_number):
             receiver=receiver,
             sender_account=sender_account,
             receiver_account=receiver_account,
-            status="requested",
+            status="request_processing",
             transaction_type="request"
         )
 
@@ -88,4 +88,32 @@ def AmountRequestConfirmation(request, account_number, transaction_id):
     except:
         messages.warning(request,"Transaction does not exist, Try again later ...")
         return redirect("account:account")
+
+def AmountRequestFinalProcess(request, account_number, transaction_id):
+    account = get_object_or_404(Account, account_number=account_number)
+    transaction = get_object_or_404(Transaction, transaction_id=transaction_id)
+
+    if request.method == "POST":
+        pin_number = request.POST.get("pin-number")
+        if pin_number == request.user.account.account_pin_number:
+            transaction.status = "request_sent"
+            transaction.save()
+
+            messages.success(request, "Your payment request has been sent successfully")
+            return redirect("core:amount-request-completed", account.account_number, transaction.transaction_id)
+        else:
+            messages.warning(request, "Error occurred. Try again later.")
+            return redirect("account:dashboard")
+
+def RequestCompleted(request, account_number, transaction_id):
+    transaction = Transaction.objects.get(transaction_id=transaction_id)
+    account = Account.objects.get(account_number=account_number)
+    kyc = KYC.objects.get(user=request.user)
+
+    context = {
+            "transaction":transaction,
+            "kyc":kyc
+        }
+    messages.success(request, "Request made Successfully")
+    return render(request, "payment_request/amount-request-completed.html", context)
 

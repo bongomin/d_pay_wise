@@ -7,7 +7,7 @@ TRANSACTION_TYPE = (
     ("transfer", "Transfer"),
     ("received", "Received"),  # Fixed typo in "received"
     ("refund", "Refund"),
-    ("request", "Request"),
+    ("request", "Payment Request"),
     ("none", "None"),
 )
 
@@ -17,7 +17,9 @@ TRANSACTION_STATUS = (
     ("pending", "Pending"),
     ("processing", "Processing"),
     ("requested", "Requested"),
-
+    ("request_sent", "request_sent"),
+    ("request_settled", "request settled"),
+    ("request_processing", "Request Processing"),
 )
 
 class Transaction(models.Model):
