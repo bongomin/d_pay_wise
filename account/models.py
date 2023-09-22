@@ -48,7 +48,7 @@ class Account(models.Model):
         unique=True, length=7, max_length=25, prefix="DAN", alphabet="1234567890")
     account_pin_number = ShortUUIDField(
         unique=True, length=4, max_length=7, alphabet="1234567890")
-    ref_code = ShortUUIDField(
+    red_code = ShortUUIDField(
         unique=True, length=10, max_length=20, alphabet="abcdefghijklmn1234567890")
     account_status = models.CharField(
         max_length=100, choices=ACCOUNT_STATUS, default="in-active")
@@ -61,8 +61,8 @@ class Account(models.Model):
     class Meta:
         ordering = ['-date']
 
-        def __str__(self):
-            return f"{self.user}"
+    def __str__(self):
+        return f"{self.user}"
 
 
 class KYC(models.Model):
