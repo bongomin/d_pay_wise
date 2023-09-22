@@ -289,51 +289,42 @@
                                                         <p class="mdr">{{ receiver.date|date:"M D, Y" }}</p>
                                                     </td>
                                                     <td>
-                                                        {% if receiver.status == "completed" %}
-                                                            <p class="text-success">
-                                                                {{ receiver.status|title }}
-                                                            </p>
+                                                        {% if receiver.status == 'completed' %}
+                                                        <p class="text-success">{{receiver.status|title}}</p>
                                                         {% endif %}
-                                                        {% if receiver.status == "request_sent" %}
-                                                            <p class="text-success">
-                                                                {{ receiver.status|title }}
-                                                            </p>
+                                                        {% if receiver.status == 'pending' %}
+                                                            <p class="inprogress">{{receiver.status|title}}</p>
                                                         {% endif %}
-                                                        {% if receiver.status == "request_settled" %}
-                                                            <p class="text-success">
-                                                                {{ receiver.status|title }}
-                                                            </p>
+                                                        {% if receiver.status == 'failed' %}
+                                                            <p class="danger">{{receiver.status|title}}</p>
                                                         {% endif %}
-                                                        {% if receiver.status == "resquest_processing" %}
-                                                            <p class="text-warning">
-                                                                {{ receiver.status|title }}
-                                                            </p>
+                                                        {% if receiver.status == 'processing' %}
+                                                            <p class="inprogress">{{receiver.status|title}}</p>
                                                         {% endif %}
-                                                        {% if receiver.status == "pending" %}
-                                                            <p class="inprogress">
-                                                                {{ receiver.status|title }}
-                                                            </p>
+                                                        {% if receiver.status == 'request_sent' %}
+                                                        <p class="text-success">{{receiver.status|title}}</p>
                                                         {% endif %}
-                                                        {% if receiver.status == "failed" %}
-                                                            <p class="danger">
-                                                                {{ receiver.status|title }}
-                                                            </p>
+                                                        {% if receiver.status == 'request_settled' %}
+                                                            <p class="text-success">{{receiver.status|title}}</p>
                                                         {% endif %}
-                                                        {% if receiver.status == "processing" %}
-                                                            <p class="inprogress">
-                                                                {{ receiver.status|title }}
-                                                            </p>
+                                                        {% if receiver.status == 'request_processing' %}
+                                                            <p class="inprogress">{{receiver.status|title}}</p>
                                                         {% endif %}
                                                     </td>
                                                     <td>
                                                         <p class="mdr"> + $ {{ receiver.amount|intcomma }}</p>
                                                     </td>
                                                     <td>
+                                                    {% if receiver.status == "request_sent"%}
                                                         <a href="{% url 'core:settlement-confirmation' receiver.sender.account.account_number receiver.transaction_id %}" class="btn btn-primary"><i class="fas fa-check-circle"></i> Settle</a>
                                                         <a href="{% url 'core:transaction-detail' transaction_id=receiver.transaction_id %}" class="btn btn-danger">
-                                                                    <i class="fas fa-x"></i>
-                                                                    cancel
+                                                        <i class="fas fa-x"></i>
+                                                        cancel
                                                         </a>
+                                                    {% endif%}
+                                                    {% if receiver.status == "request_settled"%}
+                                                        <a href="" class="btn btn-success"><i class="fas fa-check-circle"></i> Settled</a>
+                                                    {% endif%}
                                                     </td>
                                                 </tr>
                                                 {% endfor %}

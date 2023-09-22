@@ -175,11 +175,11 @@ def settlement_processing(request, account_number, transaction_id):
                 account.save()
 
                 # change status
-                transaction.status = "request_settle"
+                transaction.status = "request_settled"
                 transaction.save()
 
                 messages.success(request, f"settled to {account.user.kyc.full_name} was successfull")
-                return redirect("account:dashboard")
+                return redirect("core:settlement-completed", account.account_number, transaction.transaction_id)
 
         else:
             messages.warning(request, "incorrect pin, try again later")
@@ -188,3 +188,15 @@ def settlement_processing(request, account_number, transaction_id):
     else:
         messages.warning(request, "error occured. try again later")
         return redirect("account:dashboard")
+
+def SettlementCompleted(request, account_number ,transaction_id):
+    account = Account.objects.get(account_number=account_number)
+    transaction = Transaction.objects.get(transaction_id=transaction_id)
+
+    context = {
+            "account":account,
+            "transaction":transaction,
+        }
+    return render(request, "payment_request/settlement-completed.html", context)
+
+
