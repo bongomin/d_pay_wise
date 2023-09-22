@@ -37,7 +37,7 @@
                             </div>
                         </div>
                     </div>
-                    <form method="POST" action={% url "core:amount-request-process" account.account_number %}>
+                    <form action="{% url 'core:amount-request-process' request_account.account_number  %}" method="POST">
                     {% csrf_token %}
                         <div class="send-banance">
                             <span class="mdr">You request (amount)</span>
@@ -63,35 +63,4 @@
             </div>
         </div>
     </section>
-    {% comment %} Javascript methods {% endcomment %}
-<script>
-function calculateBalance() {
-    // Get current account balance for the user
-    let availableBalance = parseFloat("{{ request.user.account.account_balance }}");
-    let newBalanceElement = document.getElementById("new_balance");
-    let sendAmountInput = document.getElementById("amount-send");
-    let sendAmount = parseFloat(sendAmountInput.value);
-
-    let errorDiv = document.getElementById("error-div");
-    let totalToPay = document.getElementById("total-to-pay");
-
-    if (isNaN(availableBalance) || isNaN(sendAmount)) {
-        errorDiv.innerHTML = "Please enter valid numeric values.";
-        return;
-    }
-
-    let calculatedNewBalance = availableBalance - sendAmount;
-
-    if (calculatedNewBalance < 0) {
-        newBalanceElement.style.color = "red";
-        errorDiv.innerHTML = "You can only send up to $" + availableBalance.toLocaleString();
-    } else {
-        newBalanceElement.style.color = "green";
-        errorDiv.innerHTML = "";
-    }
-
-    newBalanceElement.innerHTML = `Remaining balance is: <b>$${calculatedNewBalance.toLocaleString()}</b>`;
-    totalToPay.innerHTML = `USD: <b>$${sendAmount.toLocaleString()}</b>`;
-}
-</script>
  {% endblock content %}
