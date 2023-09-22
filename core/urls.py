@@ -31,4 +31,9 @@ urlpatterns = [
         path('amount-request-final-process/<account_number>/<transaction_id>/', payment_requests.AmountRequestFinalProcess, name='amount-request-final-process'),
 
         path('amount-request-completed/<account_number>/<transaction_id>/', payment_requests.RequestCompleted, name='amount-request-completed'),
+        
+
+        # Request Settlement
+        path("settlement-confirmation/<account_number>/<transaction_id>/", payment_requests.settlement_confirmation, name="settlement-confirmation"),
+
 ]
