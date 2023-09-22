@@ -133,3 +133,18 @@ def RequestCompleted(request, account_number, transaction_id):
     messages.success(request, "Request made Successfully")
     return render(request, "payment_request/amount-request-completed.html", context)
 
+
+    # Payment Settlement
+def settlement_confirmation(request, account_number ,transaction_id):
+    settlement_account = Account.objects.get(account_number=account_number)
+    transaction = Transaction.objects.get(transaction_id=transaction_id)
+    kyc = KYC.objects.get(user=request.user)
+    account = get_object_or_404(Account, user=request.user)
+
+    context = {
+            "settlement_account":settlement_account,
+            "transaction":transaction,
+            "kyc": kyc,
+            "account": account
+        }
+    return render(request, "payment_request/settlement-confirmation.html", context)

@@ -110,7 +110,7 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Name/ Business</th>
+                                                    <th scope="col">Name/ Business recieved requests</th>
                                                     <th scope="col">Date</th>
                                                     <th scope="col">Status</th>
                                                     <th scope="col">Amount</th>
@@ -189,62 +189,62 @@
                                             </thead>
                                             <tbody>
                                             {% if request_sender_transaction %}
-                                                {% for receiver in request_sender_transaction %}
+                                                {% for s in request_sender_transaction %}
                                                 <tr data-bs-toggle="modal" data-bs-target="#transactionsMod">
                                                     <th scope="row">
-                                                        <p>{{receiver.receiver.kyc.full_name|title }}</p>
-                                                        <p class="mdr">{{ receiver.transaction_type }}</p>
+                                                        <p>{{s.receiver.kyc.full_name|title }}</p>
+                                                        <p class="mdr">{{ s.transaction_type }}</p>
                                                     </th>
                                                     <td>
-                                                        <p><small>{{ receiver.date|date:"h:i" }}</small></p>
+                                                        <p><small>{{ s.date|date:"h:i" }}</small></p>
 
-                                                        <p class="mdr">{{ receiver.date|date:"M D, Y" }}</p>
+                                                        <p class="mdr">{{ s.date|date:"M D, Y" }}</p>
                                                     </td>
                                                     <td>
-                                                        {% if receiver.status == "completed" %}
+                                                        {% if s.status == "completed" %}
                                                             <p class="text-success">
-                                                                {{ receiver.status|title }}
+                                                                {{ s.status|title }}
                                                             </p>
                                                         {% endif %}
-                                                        {% if receiver.status == "request_sent" %}
+                                                        {% if s.status == "request_sent" %}
                                                             <p class="text-success">
-                                                                {{ receiver.status|title }}
+                                                                {{ s.status|title }}
                                                             </p>
                                                         {% endif %}
-                                                        {% if receiver.status == "request_settled" %}
+                                                        {% if s.status == "request_settled" %}
                                                             <p class="text-success">
-                                                                {{ receiver.status|title }}
+                                                                {{ s.status|title }}
                                                             </p>
                                                         {% endif %}
-                                                        {% if receiver.status == "request_processing" %}
+                                                        {% if s.status == "request_processing" %}
                                                             <p class="text-warning">
-                                                                {{ receiver.status|title }}
+                                                                {{ s.status|title }}
                                                             </p>
                                                         {% endif %}
-                                                        {% if receiver.status == "pending" %}
+                                                        {% if s.status == "pending" %}
                                                             <p class="inprogress">
-                                                                {{ receiver.status|title }}
+                                                                {{ s.status|title }}
                                                             </p>
                                                         {% endif %}
-                                                        {% if receiver.status == "failed" %}
+                                                        {% if s.status == "failed" %}
                                                             <p class="danger">
-                                                                {{ receiver.status|title }}
+                                                                {{ s.status|title }}
                                                             </p>
                                                         {% endif %}
-                                                        {% if receiver.status == "processing" %}
+                                                        {% if s.status == "processing" %}
                                                             <p class="inprogress">
-                                                                {{ receiver.status|title }}
+                                                                {{ s.status|title }}
                                                             </p>
                                                         {% endif %}
                                                     </td>
                                                     <td>
-                                                        <p class="mdr"> + $ {{ receiver.amount|intcomma }}</p>
+                                                        <p class="mdr"> + $ {{ s.amount|intcomma }}</p>
                                                     </td>
                                                     <td>
-                                                        <a href="{% url 'core:transaction-detail' transaction_id=receiver.transaction_id %}" class="btn btn-primary">
+                                                        <a href="{% url 'core:transaction-detail' transaction_id=s.transaction_id %}" class="btn btn-primary">
                                                                     <i class="fas fa-eye"></i>
                                                                 </a>
-                                                        <a href="{% url 'core:transaction-detail' transaction_id=receiver.transaction_id %}" class="btn btn-danger">
+                                                        <a href="{% url 'core:transaction-detail' transaction_id=s.transaction_id %}" class="btn btn-danger">
                                                                     <i class="fas fa-trash"></i>
                                                         </a>
                                                     </td>
@@ -276,8 +276,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            {% if request_reciever_transaction %}
-                                                {% for receiver in request_reciever_transaction %}
+                                            {% if request_receiver_transaction %}
+                                                {% for receiver in request_receiver_transaction %}
                                                 <tr data-bs-toggle="modal" data-bs-target="#transactionsMod">
                                                     <th scope="row">
                                                         <p>{{receiver.receiver.kyc.full_name|title }}</p>
@@ -329,10 +329,7 @@
                                                         <p class="mdr"> + $ {{ receiver.amount|intcomma }}</p>
                                                     </td>
                                                     <td>
-                                                        <a href="{% url 'core:transaction-detail' transaction_id=receiver.transaction_id %}" class="btn btn-primary">
-                                                                    <i class="fas fa-check-circle"></i>
-                                                                    settle
-                                                                </a>
+                                                        <a href="{% url 'core:settlement-confirmation' receiver.sender.account.account_number receiver.transaction_id %}" class="btn btn-primary"><i class="fas fa-check-circle"></i> Settle</a>
                                                         <a href="{% url 'core:transaction-detail' transaction_id=receiver.transaction_id %}" class="btn btn-danger">
                                                                     <i class="fas fa-x"></i>
                                                                     cancel
