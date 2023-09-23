@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from account.models import KYC, Account
+from core.models import CreditCard
 from account.forms import KYCForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -69,7 +70,9 @@ def dashboard(request):
         except ObjectDoesNotExist:  # Catch the specific
             messages.warning(request, "You need to submit your KYC!")
             return redirect("account:kyc-reg")
+
         account = Account.objects.get(user=request.user)
+        credit_cards = CreditCard.objects.filter(user=request.user)
 
 
         #  adding creditCard Feat
@@ -95,5 +98,6 @@ def dashboard(request):
         "account": account,
         "kyc": kyc,
         "form": form,
+        "credit_cards": credit_cards
     }
     return render(request, "account/dashboard.html", context)
