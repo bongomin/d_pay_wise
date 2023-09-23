@@ -36,5 +36,6 @@ urlpatterns = [
         path("settlement-confirmation/<account_number>/<transaction_id>/", payment_requests.settlement_confirmation, name="settlement-confirmation"),
         path("settlement-processing/<account_number>/<transaction_id>/", payment_requests.settlement_processing, name="settlement-processing"),
         path("settlement-completed/<account_number>/<transaction_id>/", payment_requests.SettlementCompleted, name="settlement-completed"),
+        path("delete-payment-request/<account_number>/<transaction_id>/", payment_requests.DeletePaymentRequest, name="delete-payment-request"),
 
 ]

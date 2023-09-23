@@ -199,4 +199,21 @@ def SettlementCompleted(request, account_number ,transaction_id):
         }
     return render(request, "payment_request/settlement-completed.html", context)
 
+def DeletePaymentRequest(request,account_number, transaction_id):
+    account = Account.objects.get(account_number=account_number)
+    transaction = Transaction.objects.get(transaction_id=transaction_id)
+
+    if request.user == transaction.user:
+        transaction.delete()
+        messages.success(request, "payment request deleted successfully")
+        return redirect("core:transactions")
+    else:
+        messages.success(request, "payment request can only be deleted by the creator, try again later")
+        return redirect("core:dashboard")
+
+
+    return render(request, "payment_request/delete-payment-request.html", context)
+
+
+
 

@@ -245,7 +245,7 @@
                                                         <a href="{% url 'core:transaction-detail' transaction_id=s.transaction_id %}" class="btn btn-primary">
                                                         <i class="fas fa-eye"></i>
                                                         </a>
-                                                        <a href="{% url 'core:transaction-detail' transaction_id=s.transaction_id %}" class="btn btn-danger">
+                                                        <a href="{% url 'core:delete-payment-request' account_number=s.sender.account.account_number transaction_id=s.transaction_id %}" class="btn btn-danger">
                                                             <i class="fas fa-trash"></i>
                                                         </a>
                                                     {% endif%}
