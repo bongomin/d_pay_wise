@@ -40,8 +40,6 @@ urlpatterns = [
 
 
         # Credit Card Handling
-        path("credit-card-detail/<card_id>/", credit_card.credit_card_details, name="credit-card-detail"),
-
-
-
+        path("credit-card-details/<card_id>/", credit_card.credit_card_details, name="credit-card-details"),
+        path("fund-credit-card/<card_id>/", credit_card.fund_credit_card, name="fund-credit-card"),
 ]
