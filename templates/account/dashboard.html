@@ -13,6 +13,7 @@
                                 <div class="top-area">
                                     <div class="left-side">
                                         <h5>{{ kyc.full_name | title }}</h5>
+                                        <h6 class="mt-2"> A/C No : {{account.account_number}}</h6>
                                         <h2>$ {{account.account_balance | intcomma}}</h2>
                                         {% comment %} <h5 class="receive">Last Received <span>$25,700.00</span></h5> {% endcomment %}
                                     </div>
@@ -325,7 +326,7 @@
                         <div class="side-items">
                             <div class="single-item">
                                 <div class="section-text d-flex align-items-center justify-content-between">
-                                    <h6>Linked Payment system</h6>
+                                    <h6>Linked Payment Cards</h6>
                                     <div class="right-side">
                                         <div class="dropdown-area">
                                             <button type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -340,7 +341,7 @@
                                         <a href="{% url "core:credit-card-details" c.card_id %}">
                                             <div class="col-12">
                                                 <div class="card__main">
-                                                    <div class="{% if c.card_type == 'verve' %}Front_card{% endif %}    {% if c.card_type == 'master' %}masterCard{% endif %}    {% if c.card_type == 'visa' %}visaCard{% endif %}">
+                                                    <div class="{% if c.card_type == 'verve' %}Front_card{% endif %}    {% if c.card_type == 'mastercard' %}masterCard{% endif %}    {% if c.card_type == 'visa' %}visaCard{% endif %}">
                                                     <div class="top_card">
                                                         <span class="visa">{{c.card_type|upper}}</span>
                                                         <div class="logo">

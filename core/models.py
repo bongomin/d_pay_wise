@@ -25,7 +25,7 @@ TRANSACTION_STATUS = (
 # Card Types
 
 CARD_TYPE = (
-    ("master", "Master"),
+    ("mastercard", "Mastercard"),
     ("visa", "Visa"),  # Fixed typo in "received"
     ("verve", "Verve"),
     ("wiser", "Wiser"),

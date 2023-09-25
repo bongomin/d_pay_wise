@@ -30,7 +30,7 @@
                                                                     <div class="icon-area p-3">
                                                                         <div class="col-12">
                                                                             <div class="card__main">
-                                                                                <div class="{% if credic_card.card_type == 'verve' %}Front_card{% endif %}    {% if credic_card.card_type == 'master' %}masterCard{% endif %}    {% if credic_card.card_type == 'visa' %}visaCard{% endif %}">
+                                                                                <div class="{% if credic_card.card_type == 'verve' %}Front_card{% endif %}    {% if credic_card.card_type == 'mastercard' %}masterCard{% endif %}    {% if credic_card.card_type == 'visa' %}visaCard{% endif %}">
                                                                                 <div class="top_card">
                                                                                     <span class="visa">{{credic_card.card_type|upper}}</span>
                                                                                     <div class="logo">
@@ -119,10 +119,11 @@
                                                                                     </button>
                                                                                 </div>
                                                                                 <div class="col-md-4 mb-2">
-                                                                                    <a href="" class="reg btn btn-danger w-100 text-truncate">
-                                                                                        Delete Card
-                                                                                    </a>
-                                                                                </div>
+    <a href="{% url 'core:delete_credit_card' card_id=credic_card.card_id %}" class="reg btn btn-danger w-100 text-truncate">
+        Delete Card
+    </a>
+</div>
+
                                                                                     </div>
                                                                                 </div>
                                                                             </li>
