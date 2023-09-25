@@ -43,7 +43,7 @@ def LoginUserView(request):
             if user is not None:
                 login(request,user)
                 messages.success(request,"You are logged in ...")
-                return redirect("account:account")
+                return redirect("account:dashboard")
 
             else:
                 messages.warning(request, "username or password is incorrect")
