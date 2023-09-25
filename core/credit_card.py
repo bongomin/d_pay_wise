@@ -44,8 +44,35 @@ def fund_credit_card(request, card_id):
             return redirect("core:credit-card-details", credic_card.card_id)
 
         else:
-            messages.success(request,"Insufficient funds, kindly top up and try again ")
+            messages.error(request, "Insufficient funds. Kindly top up and try again.")
             return redirect("core:credit-card-details", credic_card.card_id)
+    else:
+        messages.error(request, "Error Occured.")
+        return redirect("core:credit-card-details", credic_card.card_id)
+
+
+
+def withraw_fund_from_card(request, card_id):
+    account = Account.objects.get(user=request.user)
+    credic_card = CreditCard.objects.get(card_id=card_id, user=request.user)
+
+    if request.method == "POST":
+        amount = request.POST.get("amount")
+        if credic_card.amount >= Decimal(amount):
+            account.account_balance += Decimal(amount)
+            account.save()
+
+            credic_card.amount -=Decimal(amount)
+            credic_card.save()
+
+            messages.success(request, "Withrawal  successfull")
+            return redirect("core:credit-card-details", credic_card.card_id)
+
+        else:
+            messages.success(request, "Insufficient funds on the Credit card. Kindly top up and try again.")
+            return redirect("core:credit-card-details", credic_card.card_id)
+
+
 
 
 
