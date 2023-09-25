@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from account.models import KYC, Account
-from core.models import CreditCard
+from core.models import CreditCard,Transaction
 from account.forms import KYCForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -73,6 +73,9 @@ def dashboard(request):
 
         account = Account.objects.get(user=request.user)
         credit_cards = CreditCard.objects.filter(user=request.user)
+        transactions = Transaction.objects.filter(user=request.user)
+
+        recipients = Transaction.objects.filter(user=request.user, transaction_type="transfer")
 
 
         #  adding creditCard Feat
@@ -98,6 +101,8 @@ def dashboard(request):
         "account": account,
         "kyc": kyc,
         "form": form,
-        "credit_cards": credit_cards
+        "credit_cards": credit_cards,
+        "transactions":transactions,
+        "recipients":recipients
     }
     return render(request, "account/dashboard.html", context)
