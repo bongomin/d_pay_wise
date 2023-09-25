@@ -119,10 +119,11 @@
                                                                                     </button>
                                                                                 </div>
                                                                                 <div class="col-md-4 mb-2">
-                                                                                    <a href="" class="reg btn btn-danger w-100 text-truncate">
-                                                                                        Delete Card
-                                                                                    </a>
-                                                                                </div>
+    <a href="{% url 'core:delete_credit_card' card_id=credic_card.card_id %}" class="reg btn btn-danger w-100 text-truncate">
+        Delete Card
+    </a>
+</div>
+
                                                                                     </div>
                                                                                 </div>
                                                                             </li>

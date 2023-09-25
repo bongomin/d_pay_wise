@@ -72,6 +72,20 @@ def withraw_fund_from_card(request, card_id):
             messages.success(request, "Insufficient funds on the Credit card. Kindly top up and try again.")
             return redirect("core:credit-card-details", credic_card.card_id)
 
+def delete_credit_card(request, card_id):
+    credit_card = CreditCard.objects.get(card_id=card_id, user=request.user)
+    credit_card.delete()
+    messages.success(request, "Card deleted successfully")
+    return redirect("account:dashboard")
+
+    # if credit_card.amount == Decimal(0):
+    #     credit_card.delete()
+    #     messages.success(request, "Card deleted successfully")
+    #     return redirect("account:dashboard")
+    # else:
+    #     messages.warning(request, "Credit card still has funds. You can only delete a card when there are no funds on it.")
+    #     return redirect("core:credit-card-details", credit_card.card_id)
+
 
 
 
