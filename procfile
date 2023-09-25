@@ -1,0 +1,1 @@
+web: gunicorn daniel_pay_wise.wsgi --log-file -
