@@ -13,6 +13,7 @@
                                 <div class="top-area">
                                     <div class="left-side">
                                         <h5>{{ kyc.full_name | title }}</h5>
+                                        <h6 class="mt-2"> A/C No : {{account.account_number}}</h6>
                                         <h2>$ {{account.account_balance | intcomma}}</h2>
                                         {% comment %} <h5 class="receive">Last Received <span>$25,700.00</span></h5> {% endcomment %}
                                     </div>
