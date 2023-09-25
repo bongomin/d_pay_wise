@@ -63,8 +63,8 @@ def AmountTransferProcess(request, account_number):
                 receiver=reciever,
                 receiver_account=receiver_account,
                 status="processing",
-                transaction_type="transfer"
-
+                transaction_type="transfer",
+                sender=sender
                 )
 
             new_transaction.save()
