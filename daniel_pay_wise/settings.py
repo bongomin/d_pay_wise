@@ -94,14 +94,17 @@ DATABASE_URL='os.environ.get("DATABASE_URL")'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get("ENGINE"),
-        'NAME': os.environ.get("NAME"),
-        'USER': os.environ.get("USER"),
-        'PASSWORD':os.environ.get("PASSWORD"),
-        'HOST':os.environ.get("HOST"),
-        'PORT':os.environ.get("PORT"),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'EGMsnnLGQuzQpRBGyKUG',
+        'HOST': 'containers-us-west-76.railway.app',
+        'PORT': '5457',
     }
 }
+
+# db_from_env = dj_database_url.config(conn_max_age=600)
+# DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
