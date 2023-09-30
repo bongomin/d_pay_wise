@@ -83,10 +83,16 @@ WSGI_APPLICATION = 'daniel_pay_wise.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+DATABASE_URL='os.environ.get("DATABASE_URL")'
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'EGMsnnLGQuzQpRBGyKUG',
+        'HOST': 'containers-us-west-76.railway.app',
+        'PORT': '5457',
     }
 }
 
