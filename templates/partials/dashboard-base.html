@@ -86,15 +86,23 @@
                             </div>
                             <div class="single-item user-area">
                                 <div class="profile-area d-flex align-items-center">
-                                    <span class="user-profile">
-                                        <img style= "width:40px; height:40px; border-radius: 50%; object-fit:cover;" src="{{ kyc.image.url }}" alt="profile">
+                                <span class="user-profile">
+                                    {% if kyc.image.url %}
+                                            <img style="width:40px; height:40px; border-radius: 50%; object-fit: cover;" src="{{ kyc.image.url }}" alt="profile">
+                                    {% else %}
+                                            <img style="width:40px; height:40px; border-radius: 50%; object-fit: cover;" src="{% static 'assets1/images/default.jpg' %}" alt="profile">
+                                    {% endif %}
                                     </span>
                                     <i class="fa-solid fa-sort-down"></i>
                                 </div>
                                 <div class="main-area user-content">
                                     <div class="head-area d-flex align-items-center">
                                         <div class="profile-img">
-                                            <img style= "width:50px; height:50px; border-radius: 50%; object-fit:cover;" src="{{ kyc.image.url }}" alt="image">
+                                            {% if kyc.image.url %}
+                                            <img style="width:40px; height:40px; border-radius: 50%; object-fit: cover;" src="{{ kyc.image.url }}" alt="profile">
+                                            {% else %}
+                                            <img style="width:40px; height:40px; border-radius: 50%; object-fit: cover;" src="{% static 'assets1/images/default.jpg' %}" alt="profile">
+                                            {% endif %}
                                         </div>
                                         <div class="profile-head">
                                             <a href="{% url 'account:account' %}">
