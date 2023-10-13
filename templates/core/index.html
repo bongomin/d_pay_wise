@@ -6,7 +6,7 @@
             <div class="shape-area">
                 <img src="{% static "assets/images/banner-box.png" %}" class="obj-1" alt="image">
                 <img src="{% static "assets/images/banner-human.png" %}" class="obj-2" alt="image">
-                <img src="{% static "assets/images/banner-rocket.png" %}" class="obj-3" alt="image">
+                {% comment %} <img src="{% static "assets/images/banner-rocket.png" %}" class="obj-3" alt="image"> {% endcomment %}
                 <img src="{% static "assets/images/banner-clock.png" %}" class="obj-4" alt="image">
             </div>
             <div class="banner-content">
@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xxl-4 col-xl-5 col-md-6">
+                        {% comment %} <div class="col-xxl-4 col-xl-5 col-md-6">
                             <div class="send-money">
                                 <form action="#">
                                     <div class="currency-area">
@@ -97,7 +97,7 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
+                        </div> {% endcomment %}
                     </div>
                 </div>
             </div>
@@ -437,164 +437,8 @@
     </div>
 </section>
     <!-- App Download end -->
-
-    <!-- FAQs In start -->
-   <section class="faqs-section">
-    <div class="overlay pt-120 pb-120">
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="col-lg-7">
-                    <div class="section-header text-center">
-                        <h5 class="sub-title">Frequently Asked Questions</h5>
-                        <h2 class="title">Your Questions, Our Expertise</h2>
-                        <p>We have a list of frequently asked questions about us</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row cus-mar">
-                <div class="col-lg-6">
-                    <div class="accordion" id="accordionLeft">
-                        <!-- FAQ 1 -->
-                        <div class="accordion-item">
-                            <h6 class="accordion-header" id="headingLeftOne">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLeftOne" aria-expanded="false" aria-controls="collapseLeftOne">
-                                    How to send money online?
-                                </button>
-                            </h6>
-                            <div id="collapseLeftOne" class="accordion-collapse collapse" aria-labelledby="headingLeftOne" data-bs-parent="#accordionLeft">
-                                <div class="accordion-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere vel venenatis, eu sit amet massa. Volutpat massa rhoncus odio feugiat tellus. Sed elit massa sed ullamcorper a in.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- FAQ 2 -->
-                        <div class="accordion-item">
-                            <h6 class="accordion-header" id="headingLeftTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLeftTwo" aria-expanded="false" aria-controls="collapseLeftTwo">
-                                    How much are money transfer fees?
-                                </button>
-                            </h6>
-                            <div id="collapseLeftTwo" class="accordion-collapse collapse" aria-labelledby="headingLeftTwo" data-bs-parent="#accordionLeft">
-                                <div class="accordion-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere vel venenatis, eu sit amet massa. Volutpat massa rhoncus odio feugiat tellus. Sed elit massa sed ullamcorper a in.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- FAQ 3 -->
-                        <div class="accordion-item">
-                            <h6 class="accordion-header" id="headingLeftThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLeftThree" aria-expanded="false" aria-controls="collapseLeftThree">
-                                    What is the fastest way to send money abroad?
-                                </button>
-                            </h6>
-                            <div id="collapseLeftThree" class="accordion-collapse collapse" aria-labelledby="headingLeftThree" data-bs-parent="#accordionLeft">
-                                <div class="accordion-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere vel venenatis, eu sit amet massa. Volutpat massa rhoncus odio feugiat tellus. Sed elit massa sed ullamcorper a in.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- FAQ 4 -->
-                        <div class="accordion-item">
-                            <h6 class="accordion-header" id="headingLeftFour">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLeftFour" aria-expanded="false" aria-controls="collapseLeftFour">
-                                    How to use D-Pay Wiser?
-                                </button>
-                            </h6>
-                            <div id="collapseLeftFour" class="accordion-collapse collapse" aria-labelledby="headingLeftFour" data-bs-parent="#accordionLeft">
-                                <div class="accordion-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere vel venenatis, eu sit amet massa. Volutpat massa rhoncus odio feugiat tellus. Sed elit massa sed ullamcorper a in.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- FAQ 5 -->
-                        <div class="accordion-item">
-                            <h6 class="accordion-header" id="headingLeftFive">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLeftFive" aria-expanded="false" aria-controls="collapseLeftFive">
-                                    How does D-Pay Wiser protect your money?
-                                </button>
-                            </h6>
-                            <div id="collapseLeftFive" class="accordion-collapse collapse" aria-labelledby="headingLeftFive" data-bs-parent="#accordionLeft">
-                                <div class="accordion-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere vel venenatis, eu sit amet massa. Volutpat massa rhoncus odio feugiat tellus. Sed elit massa sed ullamcorper a in.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="accordion" id="accordionRight">
-                        <!-- FAQ 6 -->
-                        <div class="accordion-item">
-                            <h6 class="accordion-header" id="headingRightOne">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRightOne" aria-expanded="false" aria-controls="collapseRightOne">
-                                    Are money transfer apps safe?
-                                </button>
-                            </h6>
-                            <div id="collapseRightOne" class="accordion-collapse collapse" aria-labelledby="headingRightOne" data-bs-parent="#accordionRight">
-                                <div class="accordion-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere vel venenatis, eu sit amet massa. Volutpat massa rhoncus odio feugiat tellus. Sed elit massa sed ullamcorper a in.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- FAQ 7 -->
-                        <div class="accordion-item">
-                            <h6 class="accordion-header" id="headingRightTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRightTwo" aria-expanded="false" aria-controls="collapseRightTwo">
-                                    How much money can I send?
-                                </button>
-                            </h6>
-                            <div id="collapseRightTwo" class="accordion-collapse collapse" aria-labelledby="headingRightTwo" data-bs-parent="#accordionRight">
-                                <div class="accordion-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere vel venenatis, eu sit amet massa. Volutpat massa rhoncus odio feugiat tellus. Sed elit massa sed ullamcorper a in.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- FAQ 8 -->
-                        <div class="accordion-item">
-                            <h6 class="accordion-header" id="headingRightThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRightThree" aria-expanded="false" aria-controls="collapseRightThree">
-                                    Which currency can I send?
-                                </button>
-                            </h6>
-                            <div id="collapseRightThree" class="accordion-collapse collapse" aria-labelledby="headingRightThree" data-bs-parent="#accordionRight">
-                                <div class="accordion-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere vel venenatis, eu sit amet massa. Volutpat massa rhoncus odio feugiat tellus. Sed elit massa sed ullamcorper a in.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- FAQ 9 -->
-                        <div class="accordion-item">
-                            <h6 class="accordion-header" id="headingRightFour">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRightFour" aria-expanded="false" aria-controls="collapseRightFour">
-                                    Cancel transaction
-                                </button>
-                            </h6>
-                            <div id="collapseRightFour" class="accordion-collapse collapse" aria-labelledby="headingRightFour" data-bs-parent="#accordionRight">
-                                <div class="accordion-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere vel venenatis, eu sit amet massa. Volutpat massa rhoncus odio feugiat tellus. Sed elit massa sed ullamcorper a in.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- FAQ 10 -->
-                        <div class="accordion-item">
-                            <h6 class="accordion-header" id="headingRightFive">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRightFive" aria-expanded="false" aria-controls="collapseRightFive">
-                                    Can I send multiple payments?
-                                </button>
-                            </h6>
-                            <div id="collapseRightFive" class="accordion-collapse collapse" aria-labelledby="headingRightFive" data-bs-parent="#accordionRight">
-                                <div class="accordion-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere vel venenatis, eu sit amet massa. Volutpat massa rhoncus odio feugiat tellus. Sed elit massa sed ullamcorper a in.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-    {% endblock content %}
+    {% comment %} Footer {% endcomment %}
+  <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+    <p class="m-2">© 2023 D-Pay Wiser. All rights reserved. | Developed and designed by Bongomin Daniel</p>
+  </div>
+{% endblock content %}
