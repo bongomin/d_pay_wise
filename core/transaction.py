@@ -12,7 +12,12 @@ def transaction_lists(request):
     request_sender_transaction = Transaction.objects.filter(sender=request.user, transaction_type="request")
     request_receiver_transaction = Transaction.objects.filter(receiver=request.user, transaction_type="request")
 
-    kyc = get_object_or_404(KYC, user=request.user)
+    try:
+        kyc = KYC.objects.get(user=request.user)
+    except KYC.DoesNotExist:  # Catch the specific exception
+        messages.warning(request, "You need to submit your KYC!")
+        return redirect("account:kyc-reg")
+
     account = get_object_or_404(Account, user=request.user)
 
     context = {

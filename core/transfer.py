@@ -9,7 +9,11 @@ from decimal import Decimal
 
 @login_required
 def search_user_by_account_number(request):
-    kyc = KYC.objects.get(user=request.user)
+    try:
+        kyc = KYC.objects.get(user=request.user)
+    except KYC.DoesNotExist:  # Catch the specific exception
+        messages.warning(request, "You need to submit your KYC!")
+        return redirect("account:kyc-reg")
     accounts = Account.objects.exclude(account_number=kyc.account.account_number)
     query = request.POST.get('account_number')
     account = Account.objects.get(user=request.user)
@@ -32,7 +36,11 @@ def AmountTransfer(request, account_number):
     try:
         transfer_to_account = Account.objects.get(account_number=account_number)
         account = Account.objects.get(user=request.user)
-        kyc = KYC.objects.get(user=request.user)
+        try:
+            kyc = KYC.objects.get(user=request.user)
+        except KYC.DoesNotExist:  # Catch the specific exception
+            messages.warning(request, "You need to submit your KYC!")
+            return redirect("account:kyc-reg")
     except:
         messages.warning(request,"Account does not exists")
         return redirect("core:search-account")

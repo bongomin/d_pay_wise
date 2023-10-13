@@ -11,7 +11,11 @@ from django.shortcuts import get_object_or_404
 def SearchUserRequest(request):
     account = Account.objects.all()
     query = request.POST.get("account_number")
-    kyc = KYC.objects.get(user=request.user)
+    try:
+        kyc = KYC.objects.get(user=request.user)
+    except KYC.DoesNotExist:  # Catch the specific exception
+        messages.warning(request, "You need to submit your KYC!")
+        return redirect("account:kyc-reg")
     user_account = Account.objects.get(user=request.user)
 
     if query:
@@ -31,7 +35,11 @@ def SearchUserRequest(request):
 def AmountRequest(request,account_number):
     request_account = Account.objects.get(account_number=account_number)
     account = Account.objects.get(user=request.user)
-    kyc = KYC.objects.get(user=request.user)
+    try:
+        kyc = KYC.objects.get(user=request.user)
+    except KYC.DoesNotExist:  # Catch the specific exception
+        messages.warning(request, "You need to submit your KYC!")
+        return redirect("account:kyc-reg")
     context = {
         "request_account": request_account,
         "account":account,
@@ -82,7 +90,11 @@ def AmountRequestConfirmation(request, account_number, transaction_id):
         request_account = get_object_or_404(Account, account_number=account_number)
         transaction = get_object_or_404(Transaction, transaction_id=transaction_id)
         account = get_object_or_404(Account, user=request.user)
-        kyc = get_object_or_404(KYC, user=request.user)
+        try:
+            kyc = KYC.objects.get(user=request.user)
+        except KYC.DoesNotExist:  # Catch the specific exception
+            messages.warning(request, "You need to submit your KYC!")
+        return redirect("account:kyc-reg")
 
         context = {
             "request_account": request_account,
